@@ -185,17 +185,39 @@
       if (!svg) return; // safety check if SVG not found
 
       const tl = gsap.timeline();
+      const preloaderText = document.querySelector('.preloader-text');
 
       const curve = 'M0 502S175 272 500 272s500 230 500 230V0H0Z';
       const flat = 'M0 2S175 1 500 1s500 1 500 1V0H0Z';
 
-      // Animate preloader text (if exists)
-      if ($('.preloader-text').length) {
-        tl.to('.preloader-text', {
-          delay: 0.3,
-          y: -100,
+      if (preloaderText && !preloaderText.querySelector('.preloader-letter')) {
+        const name = preloaderText.dataset.text || preloaderText.textContent.trim();
+        preloaderText.dataset.text = name;
+        preloaderText.innerHTML = name
+          .split('')
+          .map((letter) => `<span class="preloader-letter">${letter}</span>`)
+          .join('');
+      }
+
+      // Animate Huzaifa name letters before the loader wipe.
+      if ($('.preloader-letter').length) {
+        tl.fromTo(
+          '.preloader-letter',
+          { y: 70, opacity: 0, rotateX: -70 },
+          {
+            delay: 0.2,
+            y: 0,
+            opacity: 1,
+            rotateX: 0,
+            duration: 0.6,
+            stagger: 0.06,
+            ease: 'back.out(1.7)',
+          }
+        ).to('.preloader-text', {
+          delay: 0.15,
+          y: -120,
           opacity: 0,
-          duration: 0.5,
+          duration: 0.55,
           ease: 'power2.out',
         });
       }
@@ -706,6 +728,5 @@ document.querySelectorAll(".th-num1").forEach((btn)=>{
 
 
 })(jQuery);
-
 
 
