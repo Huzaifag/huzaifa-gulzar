@@ -11894,14 +11894,30 @@ h3.th-year {
   border: 1px solid #2C2C2C;
   position: relative;
 }
-.th-circle-txt-wrap .th-icontext {
+.th-circle-txt-wrap .circle {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  text-align: center;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  display: block;
+  object-fit: contain;
+  transform-origin: center center;
+}
+.th-circle-txt-wrap .th-icontext {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.th-circle-txt-wrap .th-icontext img {
+  display: block;
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
 }
 
 .th-hero-right-thumb img {
