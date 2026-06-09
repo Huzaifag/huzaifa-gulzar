@@ -12,9 +12,43 @@
 09. preloader
 10. Aos Animation
 
+/* paste before </body> or in your main JS file */
+
+(function () {
+  const counts = document.querySelectorAll('.th-stats-block .count');
+  const bars   = document.querySelectorAll('.th-stats-block .stat-bar');
+
+  function animateCount(el) {
+    const target   = parseInt(el.dataset.target, 10);
+    const duration = 1400;
+    const start    = performance.now();
+    function step(now) {
+      const t    = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 4);
+      el.textContent = Math.round(ease * target);
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          counts.forEach(animateCount);
+          bars.forEach((b) => { b.style.width = b.dataset.width + '%'; });
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  const block = document.querySelector('.th-stats-block');
+  if (block) observer.observe(block);
+})();
 
 
-****************************************************/
 
 (function ($) {
   'use strict';
