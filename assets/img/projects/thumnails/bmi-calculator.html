@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0f">
+<title>BMI · Body Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0a0a0f;
+  --surface:#13131a;
+  --surface2:#1c1c26;
+  --border:#2a2a38;
+  --border2:#3a3a50;
+  --text:#f0f0f8;
+  --muted:#7a7a9a;
+  --accent:#7c6dfa;
+  --accent2:#5b4de0;
+  --glow:rgba(124,109,250,0.18);
+  --underweight:#4fc3f7;
+  --normal:#66bb6a;
+  --overweight:#ffa726;
+  --obese:#ef5350;
+  --radius:16px;
+  --radius-sm:10px;
+}
+html{height:100%;font-size:16px}
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-weight:400;
+  line-height:1.5;
+  padding:0;
+  overflow-x:hidden;
+}
+.app{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100vh;
+  padding:env(safe-area-inset-top,24px) 20px env(safe-area-inset-bottom,32px);
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* Header */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:8px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo-icon{
+  width:38px;height:38px;
+  background:var(--accent);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.logo-text{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:800;
+  letter-spacing:0.02em;
+}
+.logo-sub{
+  font-size:11px;color:var(--muted);
+  letter-spacing:0.08em;text-transform:uppercase;
+  margin-top:1px;
+}
+.unit-toggle{
+  display:flex;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:3px;
+  gap:2px;
+}
+.unit-btn{
+  padding:6px 14px;
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:500;
+  border-radius:20px;
+  cursor:pointer;
+  transition:all .2s;
+  letter-spacing:0.04em;
+}
+.unit-btn.active{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* Card */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+}
+.card-label{
+  font-size:11px;font-weight:500;
+  color:var(--muted);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+/* Slider group */
+.slider-group{margin-bottom:20px}
+.slider-group:last-child{margin-bottom:0}
+.slider-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  margin-bottom:12px;
+}
+.slider-name{font-size:14px;color:var(--muted);}
+.slider-val{
+  font-family:'Syne',sans-serif;
+  font-size:26px;font-weight:700;
+  color:var(--text);
+  line-height:1;
+}
+.slider-unit{
+  font-size:13px;font-weight:400;
+  color:var(--muted);margin-left:3px;
+}
+.range-wrap{position:relative;}
+input[type=range]{
+  -webkit-appearance:none;
+  width:100%;height:4px;
+  background:var(--border2);
+  border-radius:2px;
+  outline:none;
+  cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:24px;height:24px;
+  background:var(--accent);
+  border-radius:50%;
+  border:3px solid var(--bg);
+  box-shadow:0 0 0 2px var(--accent);
+  cursor:pointer;
+  transition:transform .15s,box-shadow .15s;
+}
+input[type=range]:active::-webkit-slider-thumb{
+  transform:scale(1.2);
+  box-shadow:0 0 0 4px var(--glow);
+}
+input[type=range]::-moz-range-thumb{
+  width:24px;height:24px;
+  background:var(--accent);
+  border-radius:50%;
+  border:3px solid var(--bg);
+  cursor:pointer;
+}
+.range-fill{
+  position:absolute;top:0;left:0;
+  height:4px;border-radius:2px;
+  background:var(--accent);
+  pointer-events:none;
+}
+.range-ticks{
+  display:flex;justify-content:space-between;
+  margin-top:6px;
+  padding:0 2px;
+}
+.tick{font-size:10px;color:var(--muted);}
+
+/* Stepper buttons */
+.stepper{
+  display:flex;align-items:center;
+  gap:0;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  overflow:hidden;
+  width:100%;
+}
+.stepper input[type=number]{
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--text);
+  font-family:'Syne',sans-serif;
+  font-size:22px;font-weight:700;
+  text-align:center;
+  padding:14px 8px;
+  outline:none;
+  -moz-appearance:textfield;
+}
+.stepper input::-webkit-outer-spin-button,
+.stepper input::-webkit-inner-spin-button{-webkit-appearance:none}
+.step-btn{
+  width:52px;
+  background:transparent;
+  border:none;
+  color:var(--muted);
+  font-size:22px;
+  cursor:pointer;
+  padding:14px 0;
+  transition:background .15s,color .15s;
+  flex-shrink:0;
+}
+.step-btn:active{background:var(--border);color:var(--text);}
+
+/* Gender */
+.gender-row{display:flex;gap:10px;}
+.gender-btn{
+  flex:1;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  color:var(--muted);
+  font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:500;
+  padding:14px 8px;
+  cursor:pointer;
+  transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.gender-btn.active{
+  border-color:var(--accent);
+  background:rgba(124,109,250,.12);
+  color:var(--text);
+}
+.gender-icon{font-size:20px;}
+
+/* Calculate button */
+.calc-btn{
+  width:100%;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius);
+  font-family:'Syne',sans-serif;
+  font-size:16px;font-weight:700;
+  letter-spacing:0.05em;
+  padding:18px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:transform .15s,background .2s;
+}
+.calc-btn:active{transform:scale(0.98);}
+.calc-btn::after{
+  content:'';
+  position:absolute;inset:0;
+  background:rgba(255,255,255,0);
+  transition:background .15s;
+}
+.calc-btn:active::after{background:rgba(255,255,255,.08);}
+
+/* Result */
+.result-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 20px;
+  display:none;
+  animation:slideUp .35s cubic-bezier(.22,1,.36,1);
+}
+.result-card.show{display:block;}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.result-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:20px;
+}
+.bmi-number{
+  font-family:'Syne',sans-serif;
+  font-size:64px;font-weight:800;
+  line-height:1;
+  transition:color .3s;
+}
+.bmi-label-wrap{text-align:right;}
+.bmi-status{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:700;
+  transition:color .3s;
+}
+.bmi-desc{
+  font-size:12px;color:var(--muted);margin-top:4px;
+}
+
+/* Arc gauge */
+.gauge-wrap{
+  position:relative;
+  margin:8px 0 20px;
+}
+.gauge-svg{display:block;margin:0 auto;}
+.gauge-needle{
+  transform-origin:50% 100%;
+  transition:transform 0.7s cubic-bezier(.34,1.56,.64,1);
+}
+.gauge-pointer{
+  transition:cx 0.7s cubic-bezier(.34,1.56,.64,1);
+}
+
+/* BMI Range bar */
+.range-bar{margin:20px 0 0;}
+.range-bar-track{
+  height:8px;
+  border-radius:4px;
+  background:linear-gradient(to right,
+    var(--underweight) 0%, var(--underweight) 22.5%,
+    var(--normal) 22.5%, var(--normal) 50%,
+    var(--overweight) 50%, var(--overweight) 72.5%,
+    var(--obese) 72.5%, var(--obese) 100%);
+  position:relative;
+  margin-bottom:6px;
+}
+.range-indicator{
+  position:absolute;
+  top:-4px;
+  width:16px;height:16px;
+  background:var(--text);
+  border-radius:50%;
+  border:2px solid var(--bg);
+  transform:translateX(-50%);
+  transition:left 0.6s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 0 0 3px rgba(255,255,255,.2);
+}
+.range-labels{
+  display:flex;justify-content:space-between;
+  font-size:10px;color:var(--muted);
+  padding:0 2px;
+}
+.range-labels span{flex:1;text-align:center;}
+.range-labels span:first-child{text-align:left;}
+.range-labels span:last-child{text-align:right;}
+
+/* Stats grid */
+.stats-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+.stat-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:14px;
+}
+.stat-label{
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.stat-val{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:700;
+  line-height:1;
+}
+.stat-unit{font-size:11px;font-weight:400;color:var(--muted);margin-left:2px;}
+
+/* Tip section */
+.tip-box{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-left:3px solid var(--accent);
+  border-radius:var(--radius-sm);
+  padding:14px 16px;
+  margin-top:16px;
+}
+.tip-label{
+  font-size:10px;
+  font-weight:600;
+  color:var(--accent);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.tip-text{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* Progress ring on logo */
+.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+/* History section */
+.history-section{display:none}
+.history-section.show{display:block}
+.history-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.history-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:12px 14px;
+}
+.history-bmi{
+  font-family:'Syne',sans-serif;
+  font-size:16px;font-weight:700;
+}
+.history-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.history-badge{
+  font-size:11px;font-weight:600;
+  padding:4px 10px;
+  border-radius:20px;
+}
+.footer-note{
+  text-align:center;
+  font-size:11px;
+  color:var(--muted);
+  padding-bottom:8px;
+  line-height:1.6;
+}
+
+/* Smooth fill on range */
+input[type=range]{background:linear-gradient(to right,var(--accent) 0%,var(--accent) 0%,var(--border2) 0%) no-repeat;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <div>
+        <div class="logo-text">BodyCheck</div>
+        <div class="logo-sub">BMI Calculator</div>
+      </div>
+    </div>
+    <div class="unit-toggle">
+      <button class="unit-btn active" id="btn-metric" onclick="setUnit('metric')">Metric</button>
+      <button class="unit-btn" id="btn-imperial" onclick="setUnit('imperial')">Imperial</button>
+    </div>
+  </div>
+
+  <!-- Inputs Card -->
+  <div class="card">
+    <div class="card-label">Your details</div>
+
+    <!-- Gender -->
+    <div style="margin-bottom:20px">
+      <div class="slider-header">
+        <span class="slider-name">Gender</span>
+      </div>
+      <div class="gender-row">
+        <button class="gender-btn active" id="g-male" onclick="setGender('male')">
+          <span class="gender-icon">♂</span> Male
+        </button>
+        <button class="gender-btn" id="g-female" onclick="setGender('female')">
+          <span class="gender-icon">♀</span> Female
+        </button>
+      </div>
+    </div>
+
+    <!-- Age -->
+    <div style="margin-bottom:20px">
+      <div class="slider-header">
+        <span class="slider-name">Age</span>
+        <span><span class="slider-val" id="age-val">25</span><span class="slider-unit">yrs</span></span>
+      </div>
+      <div class="range-wrap">
+        <div class="range-fill" id="age-fill"></div>
+        <input type="range" id="age-slider" min="10" max="100" value="25" oninput="syncSlider('age')">
+      </div>
+      <div class="range-ticks">
+        <span class="tick">10</span><span class="tick">30</span><span class="tick">55</span><span class="tick">75</span><span class="tick">100</span>
+      </div>
+    </div>
+
+    <!-- Height -->
+    <div class="slider-group" id="height-group">
+      <div class="slider-header">
+        <span class="slider-name">Height</span>
+        <span>
+          <span class="slider-val" id="height-val">170</span>
+          <span class="slider-unit" id="height-unit">cm</span>
+        </span>
+      </div>
+      <div class="range-wrap">
+        <div class="range-fill" id="height-fill"></div>
+        <input type="range" id="height-slider" min="100" max="220" value="170" oninput="syncSlider('height')">
+      </div>
+      <div class="range-ticks">
+        <span class="tick" id="h-t1">100cm</span>
+        <span class="tick" id="h-t2">140cm</span>
+        <span class="tick" id="h-t3">180cm</span>
+        <span class="tick" id="h-t4">220cm</span>
+      </div>
+
+      <!-- Imperial feet/inches -->
+      <div id="height-imp" style="display:none;margin-top:12px">
+        <div style="display:flex;gap:10px;">
+          <div style="flex:1">
+            <div class="card-label" style="margin-bottom:8px">Feet</div>
+            <div class="stepper">
+              <button class="step-btn" onclick="stepImp('ft',-1)">−</button>
+              <input type="number" id="ft-input" value="5" min="3" max="8" oninput="impToMetric()">
+              <button class="step-btn" onclick="stepImp('ft',1)">+</button>
+            </div>
+          </div>
+          <div style="flex:1">
+            <div class="card-label" style="margin-bottom:8px">Inches</div>
+            <div class="stepper">
+              <button class="step-btn" onclick="stepImp('in',-1)">−</button>
+              <input type="number" id="in-input" value="7" min="0" max="11" oninput="impToMetric()">
+              <button class="step-btn" onclick="stepImp('in',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weight -->
+    <div class="slider-group" style="margin-top:20px">
+      <div class="slider-header">
+        <span class="slider-name">Weight</span>
+        <span>
+          <span class="slider-val" id="weight-val">70</span>
+          <span class="slider-unit" id="weight-unit">kg</span>
+        </span>
+      </div>
+      <div class="range-wrap">
+        <div class="range-fill" id="weight-fill"></div>
+        <input type="range" id="weight-slider" min="30" max="200" value="70" oninput="syncSlider('weight')">
+      </div>
+      <div class="range-ticks">
+        <span class="tick" id="w-t1">30kg</span>
+        <span class="tick" id="w-t2">85kg</span>
+        <span class="tick" id="w-t3">140kg</span>
+        <span class="tick" id="w-t4">200kg</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calculate -->
+  <button class="calc-btn" onclick="calculate()">Calculate BMI</button>
+
+  <!-- Result Card -->
+  <div class="result-card" id="result-card">
+    <div class="card-label">Your result</div>
+
+    <div class="result-top">
+      <div>
+        <div class="bmi-number" id="bmi-number">--</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Body Mass Index</div>
+      </div>
+      <div class="bmi-label-wrap">
+        <div class="bmi-status" id="bmi-status">--</div>
+        <div class="bmi-desc" id="bmi-desc">--</div>
+      </div>
+    </div>
+
+    <!-- Arc Gauge SVG -->
+    <div class="gauge-wrap">
+      <svg class="gauge-svg" width="260" height="140" viewBox="0 0 260 140">
+        <defs>
+          <linearGradient id="track-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#4fc3f7"/>
+            <stop offset="25%" stop-color="#66bb6a"/>
+            <stop offset="60%" stop-color="#ffa726"/>
+            <stop offset="100%" stop-color="#ef5350"/>
+          </linearGradient>
+          <filter id="glow-filter">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Track background -->
+        <path d="M 20 130 A 110 110 0 0 1 240 130" fill="none" stroke="#2a2a38" stroke-width="12" stroke-linecap="round"/>
+        <!-- Colored arc -->
+        <path id="gauge-arc" d="M 20 130 A 110 110 0 0 1 240 130" fill="none" stroke="url(#track-grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 345" style="transition:stroke-dasharray 0.7s cubic-bezier(.22,1,.36,1)"/>
+        <!-- Needle -->
+        <line id="gauge-needle" x1="130" y1="130" x2="130" y2="36" stroke="#fff" stroke-width="2.5" stroke-linecap="round" style="transform-origin:130px 130px;transform:rotate(-90deg);transition:transform 0.7s cubic-bezier(.34,1.56,.64,1)"/>
+        <circle cx="130" cy="130" r="6" fill="#fff"/>
+        <!-- Labels -->
+        <text x="12" y="148" font-size="9" fill="#7a7a9a" font-family="Inter">16</text>
+        <text x="110" y="26" font-size="9" fill="#7a7a9a" font-family="Inter" text-anchor="middle">25</text>
+        <text x="240" y="148" font-size="9" fill="#7a7a9a" font-family="Inter" text-anchor="end">40+</text>
+      </svg>
+    </div>
+
+    <!-- Gradient range bar -->
+    <div class="range-bar">
+      <div class="range-bar-track">
+        <div class="range-indicator" id="range-indicator" style="left:0%"></div>
+      </div>
+      <div class="range-labels">
+        <span style="color:var(--underweight)">Underweight</span>
+        <span style="color:var(--normal)">Normal</span>
+        <span style="color:var(--overweight)">Overweight</span>
+        <span style="color:var(--obese)">Obese</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Ideal weight</div>
+        <div class="stat-val" id="stat-ideal">--<span class="stat-unit" id="stat-ideal-unit">kg</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">BMR (daily cal)</div>
+        <div class="stat-val" id="stat-bmr">--<span class="stat-unit">kcal</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Body fat (est.)</div>
+        <div class="stat-val" id="stat-fat">--<span class="stat-unit">%</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Weight status</div>
+        <div class="stat-val" id="stat-diff" style="font-size:14px;line-height:1.3">--</div>
+      </div>
+    </div>
+
+    <!-- Tip -->
+    <div class="tip-box" id="tip-box">
+      <div class="tip-label">💡 Insight</div>
+      <div class="tip-text" id="tip-text">--</div>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="history-section" id="history-section">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div class="card-label" style="margin:0">History</div>
+        <button onclick="clearHistory()" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:Inter">Clear</button>
+      </div>
+      <div class="history-list" id="history-list"></div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    BMI is a screening tool, not a diagnostic measure.<br>
+    Consult a healthcare professional for medical advice.
+  </div>
+
+</div>
+
+<script>
+let unit='metric';
+let gender='male';
+let history=JSON.parse(localStorage.getItem('bmi-history')||'[]');
+
+const catColors={underweight:'var(--underweight)',normal:'var(--normal)',overweight:'var(--overweight)',obese:'var(--obese)'};
+const catLabels={underweight:'Underweight',normal:'Normal',overweight:'Overweight',obese:'Obese / High Risk'};
+const tips={
+  underweight:'Consider increasing caloric intake with nutrient-dense foods. Strength training helps build healthy mass.',
+  normal:'Great range! Focus on maintaining with balanced nutrition and 150+ min/week of moderate exercise.',
+  overweight:'Small reductions in portions and 30min daily walking can shift your BMI meaningfully over months.',
+  obese:'Consult a doctor for a personalized plan. Even 5-10% weight loss significantly reduces health risks.'
+};
+
+function setUnit(u){
+  unit=u;
+  document.getElementById('btn-metric').classList.toggle('active',u==='metric');
+  document.getElementById('btn-imperial').classList.toggle('active',u==='imperial');
+
+  const impH=document.getElementById('height-imp');
+  const metricSlider=document.getElementById('height-slider');
+
+  if(u==='imperial'){
+    impH.style.display='block';
+    metricSlider.parentElement.style.display='none';
+    document.getElementById('height-unit').textContent='ft';
+    document.getElementById('weight-unit').textContent='lbs';
+    document.getElementById('weight-slider').min=66;
+    document.getElementById('weight-slider').max=440;
+    document.getElementById('weight-slider').value=Math.round(parseFloat(document.getElementById('weight-slider').value)*2.20462);
+    document.getElementById('w-t1').textContent='66lbs';
+    document.getElementById('w-t2').textContent='187lbs';
+    document.getElementById('w-t3').textContent='308lbs';
+    document.getElementById('w-t4').textContent='440lbs';
+    metricToImp();
+  } else {
+    impH.style.display='none';
+    metricSlider.parentElement.style.display='block';
+    document.getElementById('height-unit').textContent='cm';
+    document.getElementById('weight-unit').textContent='kg';
+    document.getElementById('weight-slider').min=30;
+    document.getElementById('weight-slider').max=200;
+    const lbs=parseFloat(document.getElementById('weight-slider').value);
+    document.getElementById('weight-slider').value=Math.round(lbs/2.20462);
+    document.getElementById('w-t1').textContent='30kg';
+    document.getElementById('w-t2').textContent='85kg';
+    document.getElementById('w-t3').textContent='140kg';
+    document.getElementById('w-t4').textContent='200kg';
+  }
+  syncSlider('weight');
+  syncSlider('height');
+}
+
+function metricToImp(){
+  const cm=parseFloat(document.getElementById('height-slider').value);
+  const totalIn=Math.round(cm/2.54);
+  const ft=Math.floor(totalIn/12);
+  const inch=totalIn%12;
+  document.getElementById('ft-input').value=ft;
+  document.getElementById('in-input').value=inch;
+  document.getElementById('height-val').textContent=`${ft}'${inch}"`;
+}
+
+function impToMetric(){
+  const ft=parseFloat(document.getElementById('ft-input').value)||0;
+  const inch=parseFloat(document.getElementById('in-input').value)||0;
+  const cm=Math.round((ft*12+inch)*2.54);
+  document.getElementById('height-slider').value=Math.min(220,Math.max(100,cm));
+  document.getElementById('height-val').textContent=`${ft}'${inch}"`;
+  updateFill(document.getElementById('height-slider'),'height-fill');
+}
+
+function stepImp(field,dir){
+  const el=document.getElementById(field==='ft'?'ft-input':'in-input');
+  const min=field==='ft'?3:0;
+  const max=field==='ft'?8:11;
+  let v=parseFloat(el.value)+dir;
+  if(field==='in'){
+    if(v>11){v=0;stepImp('ft',1);return;}
+    if(v<0){v=11;stepImp('ft',-1);return;}
+  }
+  el.value=Math.min(max,Math.max(min,v));
+  impToMetric();
+}
+
+function setGender(g){
+  gender=g;
+  document.getElementById('g-male').classList.toggle('active',g==='male');
+  document.getElementById('g-female').classList.toggle('active',g==='female');
+}
+
+function updateFill(slider,fillId){
+  const min=+slider.min,max=+slider.max,val=+slider.value;
+  const pct=(val-min)/(max-min)*100;
+  document.getElementById(fillId).style.width=pct+'%';
+  slider.style.background=`linear-gradient(to right,var(--accent) 0%,var(--accent) ${pct}%,var(--border2) ${pct}%) no-repeat`;
+}
+
+function syncSlider(type){
+  const slider=document.getElementById(type+'-slider');
+  const val=+slider.value;
+  updateFill(slider,type+'-fill');
+
+  if(type==='age') document.getElementById('age-val').textContent=val;
+  else if(type==='height'){
+    if(unit==='imperial') metricToImp();
+    else document.getElementById('height-val').textContent=val;
+  }
+  else if(type==='weight'){
+    document.getElementById('weight-val').textContent=val;
+  }
+}
+
+function getValues(){
+  const heightCm=+document.getElementById('height-slider').value;
+  let weightKg=+document.getElementById('weight-slider').value;
+  if(unit==='imperial') weightKg=weightKg/2.20462;
+  const age=+document.getElementById('age-slider').value;
+  return {heightCm,weightKg,age};
+}
+
+function classify(bmi){
+  if(bmi<18.5) return 'underweight';
+  if(bmi<25) return 'normal';
+  if(bmi<30) return 'overweight';
+  return 'obese';
+}
+
+function bmiToGaugeAngle(bmi){
+  const clamp=Math.min(40,Math.max(10,bmi));
+  return ((clamp-10)/30)*180-90;
+}
+
+function bmiToBarPct(bmi){
+  if(bmi<=16) return 0;
+  if(bmi>=40) return 100;
+  if(bmi<18.5) return ((bmi-16)/(18.5-16))*22.5;
+  if(bmi<25) return 22.5+((bmi-18.5)/(25-18.5))*27.5;
+  if(bmi<30) return 50+((bmi-25)/(30-25))*22.5;
+  return 72.5+((bmi-30)/(40-30))*27.5;
+}
+
+function calculate(){
+  const {heightCm,weightKg,age}=getValues();
+  if(!heightCm||!weightKg) return;
+
+  const hm=heightCm/100;
+  const bmi=weightKg/(hm*hm);
+  const cat=classify(bmi);
+  const color=catColors[cat];
+
+  document.getElementById('bmi-number').textContent=bmi.toFixed(1);
+  document.getElementById('bmi-number').style.color=color;
+  document.getElementById('bmi-status').textContent=catLabels[cat];
+  document.getElementById('bmi-status').style.color=color;
+  document.getElementById('bmi-desc').textContent=`Range: ${bmiRange(cat)}`;
+
+  const arc=document.getElementById('gauge-arc');
+  const totalLen=345;
+  const pct=Math.min(1,(bmi-10)/30);
+  arc.style.strokeDasharray=`${pct*totalLen} ${totalLen}`;
+  const deg=bmiToGaugeAngle(bmi);
+  document.getElementById('gauge-needle').style.transform=`rotate(${deg}deg)`;
+
+  const barPct=bmiToBarPct(bmi);
+  document.getElementById('range-indicator').style.left=Math.min(98,Math.max(2,barPct))+'%';
+
+  let idealW_low=18.5*(hm*hm);
+  let idealW_high=24.9*(hm*hm);
+  let idealStr,diffStr;
+
+  if(unit==='metric'){
+    idealStr=`${idealW_low.toFixed(0)}–${idealW_high.toFixed(0)} <span class="stat-unit">kg</span>`;
+    const diff=weightKg-idealW_high;
+    diffStr=diff>0?`+${diff.toFixed(1)} kg to lose`:(diff<0?`${Math.abs(diff).toFixed(1)} kg below range`:'In ideal range');
+  } else {
+    idealStr=`${(idealW_low*2.20462).toFixed(0)}–${(idealW_high*2.20462).toFixed(0)} <span class="stat-unit">lbs</span>`;
+    const wlbs=weightKg*2.20462;
+    const diff=wlbs-(idealW_high*2.20462);
+    diffStr=diff>0?`+${diff.toFixed(0)} lbs to lose`:(diff<0?`${Math.abs(diff).toFixed(0)} lbs below range`:'In ideal range');
+  }
+  document.getElementById('stat-ideal').innerHTML=idealStr;
+  document.getElementById('stat-diff').textContent=diffStr;
+
+  let bmr;
+  if(gender==='male') bmr=88.362+(13.397*weightKg)+(4.799*heightCm)-(5.677*age);
+  else bmr=447.593+(9.247*weightKg)+(3.098*heightCm)-(4.330*age);
+  document.getElementById('stat-bmr').innerHTML=`${Math.round(bmr)}<span class="stat-unit">kcal</span>`;
+
+  let fat;
+  if(gender==='male') fat=(1.20*bmi)+(0.23*age)-16.2;
+  else fat=(1.20*bmi)+(0.23*age)-5.4;
+  document.getElementById('stat-fat').innerHTML=`${Math.max(1,fat).toFixed(1)}<span class="stat-unit">%</span>`;
+
+  document.getElementById('tip-text').textContent=tips[cat];
+
+  const rc=document.getElementById('result-card');
+  rc.classList.remove('show');
+  void rc.offsetWidth;
+  rc.classList.add('show');
+
+  addHistory(bmi,cat);
+}
+
+function bmiRange(cat){
+  return{underweight:'< 18.5',normal:'18.5 – 24.9',overweight:'25 – 29.9',obese:'≥ 30'}[cat];
+}
+
+function addHistory(bmi,cat){
+  const now=new Date();
+  const entry={bmi:bmi.toFixed(1),cat,time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),date:now.toLocaleDateString([],{month:'short',day:'numeric'})};
+  history.unshift(entry);
+  if(history.length>5) history.pop();
+  localStorage.setItem('bmi-history',JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory(){
+  if(history.length===0) return;
+  document.getElementById('history-section').classList.add('show');
+  const list=document.getElementById('history-list');
+  list.innerHTML=history.map(h=>`
+    <div class="history-item">
+      <div>
+        <div class="history-bmi" style="color:${catColors[h.cat]}">${h.bmi}</div>
+        <div class="history-meta">${h.date} · ${h.time}</div>
+      </div>
+      <div class="history-badge" style="background:${catColors[h.cat]}22;color:${catColors[h.cat]}">${catLabels[h.cat]||h.cat}</div>
+    </div>
+  `).join('');
+}
+
+function clearHistory(){
+  history=[];
+  localStorage.removeItem('bmi-history');
+  document.getElementById('history-section').classList.remove('show');
+}
+
+function init(){
+  ['age','height','weight'].forEach(t=>syncSlider(t));
+  renderHistory();
+}
+
+init();
+</script>
+</body>
+</html>

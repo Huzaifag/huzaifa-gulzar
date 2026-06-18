@@ -15,7 +15,7 @@
 /* paste before </body> or in your main JS file */
 
 (function () {
-  const counts = document.querySelectorAll('.th-stats-block .count');
+  const counts = document.querySelectorAll('.th-stats-block .stat-count');
   const bars   = document.querySelectorAll('.th-stats-block .stat-bar');
 
   function animateCount(el) {
@@ -718,7 +718,8 @@ var thSwiper = new Swiper(".thHeroSwiper", {
     speed: 800,
     autoplay: {
           delay: 3000, 
-          disableOnInteraction: false, // stop on hover/click না
+          disableOnInteraction: false, 
+          pauseOnMouseEnter: true,
       },
 
 
@@ -764,3 +765,39 @@ document.querySelectorAll(".th-num1").forEach((btn)=>{
 })(jQuery);
 
 
+
+/* Iframe Desktop View Scaler */
+function scaleIframes() {
+    document.querySelectorAll('.iframe-container').forEach(wrap => {
+        const iframe = wrap.querySelector('iframe');
+        if(!iframe) return;
+        const targetWidth = 1280; // Desktop width
+        const wrapWidth = wrap.clientWidth;
+        if(wrapWidth === 0) return; // Prevent divide by zero if hidden
+        const scale = wrapWidth / targetWidth;
+        
+        iframe.style.position = 'absolute';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.width = targetWidth + 'px';
+        iframe.style.height = (wrap.clientHeight / scale) + 'px';
+        iframe.style.transform = 'scale(' + scale + ')';
+        iframe.style.transformOrigin = '0 0';
+    });
+}
+window.addEventListener('resize', scaleIframes);
+window.addEventListener('load', scaleIframes);
+setTimeout(scaleIframes, 500); // Initial run after Swiper setup
+
+/* Footer Title Collision Effect */
+const footerTitle = document.querySelector('.footer-title');
+if(footerTitle) {
+    const text = footerTitle.textContent.trim();
+    footerTitle.textContent = '';
+    footerTitle.classList.add('th-collision-text');
+    for(let i = 0; i < text.length; i++) {
+        let span = document.createElement('span');
+        span.textContent = text[i];
+        footerTitle.appendChild(span);
+    }
+}
