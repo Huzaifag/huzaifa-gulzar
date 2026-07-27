@@ -298,6 +298,48 @@
 	================================ */
   $('.popup-image').magnificPopup({
     type: 'image',
+    mainClass: 'mfp-with-zoom th-custom-popup',
+    image: {
+      verticalFit: true,
+      titleSrc: function(item) {
+        var el = item.el;
+        var title = el.attr('data-title') || el.attr('title') || el.find('img').attr('alt') || 'Project Preview';
+        var details = el.attr('data-details') || 'Explore high-performance software architecture, responsive UI/UX, and end-to-end full stack solutions developed by Huzaifa Gulzar.';
+        var tech = el.attr('data-tech') || 'Laravel, PHP 8+, React, Vue.js, MySQL, AI / LLM';
+
+        var html = '<div class="th-popup-cards-grid">';
+        
+        // Card 1: Overview & Details (Side 1)
+        html += '<div class="th-popup-card th-popup-card-left">';
+        html += '<div class="th-popup-header"><i class="fa-regular fa-terminal"></i> <span>' + title + '</span></div>';
+        html += '<p class="th-popup-desc">' + details + '</p>';
+        html += '<div class="th-popup-meta"><span class="th-meta-item"><i class="fa-regular fa-circle-check" style="color: #DEFF00;"></i> Verified Architecture</span><span class="th-meta-item"><i class="fa-regular fa-bolt" style="color: #DEFF00;"></i> Optimized Performance</span></div>';
+        html += '</div>';
+
+        // Card 2: Technologies & Stack (Side 2)
+        html += '<div class="th-popup-card th-popup-card-right">';
+        html += '<div class="th-popup-header"><i class="fa-regular fa-layer-group"></i> <span>Tech Stack & Tools</span></div>';
+        if(tech) {
+          html += '<div class="th-popup-tech-tags">';
+          tech.split(',').forEach(function(t) {
+            if(t.trim()) {
+              html += '<span class="th-popup-badge">' + t.trim() + '</span>';
+            }
+          });
+          html += '</div>';
+        }
+        html += '<div style="margin-top: auto; padding-top: 18px;"><a href="contact.html" class="th-popup-btn">Inquire About This Service <i class="fa-regular fa-arrow-right"></i></a></div>';
+        html += '</div>';
+
+        html += '</div>';
+        return html;
+      }
+    },
+    zoom: {
+      enabled: true,
+      duration: 300,
+      easing: 'ease-in-out'
+    }
   });
   /* ================================
 		08. popup video

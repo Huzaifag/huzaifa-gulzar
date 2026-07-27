@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="aiGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DEFF00"/>
+      <stop offset="50%" stop-color="#00FFCC"/>
+      <stop offset="100%" stop-color="#0088FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Center AI Core -->
+  <circle cx="256" cy="256" r="60" fill="url(#aiGlow)" opacity="0.9"/>
+  <circle cx="256" cy="256" r="30" fill="#111"/>
+  <!-- Sparkles / Neural Stars -->
+  <path d="M256 60 L270 180 L390 194 L270 208 L256 328 L242 208 L122 194 L242 180 Z" fill="url(#aiGlow)"/>
+  <path d="M380 340 L390 400 L450 410 L390 420 L380 480 L370 420 L310 410 L370 400 Z" fill="#00FFCC"/>
+  <path d="M140 360 L146 400 L186 406 L146 412 L140 452 L134 412 L94 406 L134 400 Z" fill="#DEFF00"/>
+  <!-- Connecting Circuit Lines -->
+  <line x1="256" y1="256" x2="380" y2="410" stroke="#00FFCC" stroke-width="6" stroke-dasharray="6 6"/>
+  <line x1="256" y1="256" x2="140" y2="406" stroke="#DEFF00" stroke-width="6" stroke-dasharray="6 6"/>
+  <circle cx="380" cy="410" r="10" fill="#FFFFFF"/>
+  <circle cx="140" cy="406" r="8" fill="#FFFFFF"/>
+</svg>

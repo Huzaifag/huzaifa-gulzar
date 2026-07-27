@@ -24,6 +24,58 @@
     <link rel="stylesheet" href="assets/css/odometer-theme-default.min.css">
     <!-- style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Fix for sticky positioning: overflow-x: hidden on body/html breaks position: sticky */
+        html, body {
+            overflow-x: clip !important;
+        }
+        
+        /* Full-Screen Synchronized Slides */
+        .sticky-slide {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            background-color: #0a0a0a;
+            box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+        }
+
+        .sticky-slide .row {
+            height: 90vh;
+            min-height: 640px;
+        }
+
+        .sticky-slide .col-md-6 {
+            height: 100%;
+        }
+
+        .sticky-slide .th-serviceboxwrap,
+        .sticky-slide .th-service-thumb {
+            height: 100%;
+        }
+
+        .sticky-slide .th-service-thumb img {
+            height: 100% !important;
+            max-height: 100% !important;
+            width: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+        }
+
+        .sticky-slide .th-service-iconbox {
+            height: 100%;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+
+        /* Slides 2-4 get the decorative background image */
+        .sticky-slide:not(:first-of-type) {
+            background-image: url(assets/img/designer/th-service-bg.png);
+        }
+    </style>
 </head>
 
 <body>
@@ -123,7 +175,7 @@
         <div class="th-offcanvas-wrapper">
             <div class="th-offcanvas-header d-flex justify-content-between align-items-center mb-50">
                 <div class="th-offcanvas-logo">
-                    <a href="index.html"><img src="assets/img/logo/th-block-black1.1.png" alt=""></a>
+                    <a href="index.html"><img src="assets/img/logo/logo-white.png" height="50" alt="Huzaifa Gulzar"></a>
                 </div>
                 <div class="th-offcanvas-close">
                     <button class="th-offcanvas-close-toggle"><i class="fa-regular fa-xmark"></i></button>
@@ -135,39 +187,37 @@
             </div>
 
             <div class="th-offcanvas-content mb-40">
-                <h2 class="th-offcanvas-title">Hello There</h2>
-                <p class="th-offcanvas-para">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                <h2 class="th-offcanvas-title">Huzaifa Gulzar</h2>
+                <p class="th-offcanvas-para">Full Stack & AI Developer specializing in SaaS platforms, Laravel, PHP 8+, React, Vue.js, and cutting-edge AI/LLM integrations.</p>
             </div>
 
             <div class="th-offcanvas-gallery mb-40">
-                <a class="popup-image" href="assets/img/devceloper/th-blog-thumb2.1.png"><img class="w-100"
-                        src="assets/img/devceloper/th-blog-thumb2.1.png" alt=""></a>
+                <a class="popup-image" href="assets/img/designer/laravel-backend.png" data-title="Backend & Laravel Development" data-details="Enterprise-grade REST APIs, robust database architecture, and scalable server management built with Laravel and modern PHP 8+." data-tech="Laravel 10, PHP 8+, MySQL, Redis, REST APIs, Nginx, Linux"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                        src="assets/img/designer/laravel-backend.png" alt="Laravel Backend"></a>
 
-                <a class="popup-image" href="assets/img/devceloper/th-blog-thumb2.2.png"><img class="w-100"
-                        src="assets/img/devceloper/th-blog-thumb2.2.png" alt=""></a>
+                <a class="popup-image" href="assets/img/designer/fullstack-solutions.png" data-title="Full Stack Web Solutions" data-details="End-to-end SaaS platforms with responsive UI/UX, real-time WebSocket data synchronization, and cloud infrastructure." data-tech="Vue.js, React, Node.js, Laravel, WebSockets, Pusher, Cloud"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                        src="assets/img/designer/fullstack-solutions.png" alt="Full Stack Solutions"></a>
 
-                <a class="popup-image" href="assets/img/devceloper/th-blog-thumb2.1.png"><img class="w-100"
-                        src="assets/img/devceloper/th-blog-thumb2.1.png" alt=""></a>
+                <a class="popup-image" href="assets/img/designer/ai-llm-dashboard.png" data-title="AI & LLM Integration" data-details="Next-generation intelligent applications featuring RAG chatbots, OpenAI & Claude AI integrations, and automated workflows." data-tech="OpenAI API, Claude AI, RAG, Python, Vector DB, LLM Agents"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                        src="assets/img/designer/ai-llm-dashboard.png" alt="AI LLM Dashboard"></a>
 
-                <a class="popup-image" href="assets/img/devceloper/th-blog-thumb2.2.png"><img class="w-100"
-                        src="assets/img/devceloper/th-blog-thumb2.2.png" alt=""></a>
+                <a class="popup-image" href="assets/img/designer/th-service-thumb1.1.webp" data-title="Frontend Web Development" data-details="High-performance, dynamic user interfaces built with React, Vue, and Tailwind CSS optimized for Core Web Vitals and SEO." data-tech="React.js, Vue.js, TypeScript, Tailwind CSS, Vite, JavaScript ES6+"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                        src="assets/img/designer/th-service-thumb1.1.webp" alt="Frontend Development"></a>
             </div>
 
-
-
             <div class="th-offcanvas-info mb-30">
-                <h3 class="th-offcanvas-title mb-20">Contact Us</h3>
-                <a href="#">+57-9954-6476</a>
-                <a href="#">hello@Pixelor.com</a>
-                <a href="#">Los Angles,California</a>
+                <h3 class="th-offcanvas-title mb-20">Get In Touch</h3>
+                <a href="mailto:huzaifa6715@gmail.com"><i class="fa-regular fa-envelope" style="color: #DEFF00; margin-right: 10px;"></i> huzaifa6715@gmail.com</a>
+                <a href="contact.html"><i class="fa-regular fa-location-dot" style="color: #DEFF00; margin-right: 10px;"></i> Available Worldwide / Remote</a>
+                <a href="portfolio.html"><i class="fa-regular fa-briefcase" style="color: #DEFF00; margin-right: 10px;"></i> View Featured Works</a>
             </div>
 
             <div class="th-offcanvas-social mb-30">
                 <h3 class="th-offcanvas-title mb-20">Follow Us</h3>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:huzaifa6715@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -214,96 +264,27 @@
                                             <span class="th-text">CONTACT ME</span>
                                         </a>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xl-9">
-                                            <div class="th-auth-boxflex">
-                                                <!-- stats block — replaces testimonial -->
-                                                <div class="th-stats-block" data-aos="fade-up">
-                                                    <div class="stats-wrap">
-
-                                                        <div class="stat-cell">
-                                                            <div class="stat-number">
-                                                                <span class="stat-count" data-target="2">0</span>
-                                                                <span class="stat-suffix">+</span>
-                                                            </div>
-                                                            <div class="stat-label">Years Experience</div>
-                                                            <div class="stat-sub">Full-stack, production</div>
-                                                            <div class="stat-bar" data-width="40"></div>
-                                                        </div>
-
-                                                        <div class="stat-cell">
-                                                            <div class="stat-number">
-                                                                <span class="stat-count" data-target="15">0</span>
-                                                                <span class="stat-suffix">+</span>
-                                                            </div>
-                                                            <div class="stat-label">Projects Shipped</div>
-                                                            <div class="stat-sub">POS · logistics · CMS · APIs</div>
-                                                            <div class="stat-bar" data-width="75"></div>
-                                                        </div>
-
-                                                        <div class="stat-cell">
-                                                            <div class="stat-number">
-                                                                <span class="stat-count" data-target="8">0</span>
-                                                                <span class="stat-suffix"></span>
-                                                            </div>
-                                                            <div class="stat-label">Core Technologies</div>
-                                                            <div class="stat-sub">Production-grade stack</div>
-                                                            <div class="stat-bar" data-width="55"></div>
-                                                        </div>
-
-                                                        <div class="stat-cell">
-                                                            <div class="stat-number">
-                                                                <span class="stat-count" data-target="100">0</span>
-                                                                <span class="stat-suffix">%</span>
-                                                            </div>
-                                                            <div class="stat-label">On-Time Delivery</div>
-                                                            <div class="stat-sub">Client commitments</div>
-                                                            <div class="stat-bar" data-width="100"></div>
-                                                        </div>
-
-                                                        <div class="stat-cell stat-cell--wide">
-                                                            <div class="stat-availability">
-                                                                <span class="availability-dot"></span>
-                                                                Available for freelance · Lahore · Remote-ready
-                                                            </div>
-                                                            <div class="stack-pills">
-                                                                <span class="pill">Laravel</span>
-                                                                <span class="pill">Vue.js</span>
-                                                                <span class="pill">React</span>
-                                                                <span class="pill">MySQL</span>
-                                                                <span class="pill">Redis</span>
-                                                                <span class="pill">OpenAI API</span>
-                                                                <span class="pill">Nginx</span>
-                                                                <span class="pill">Linux</span>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-xl-3 col-lg-5">
                                 <div class="p-relative z-index-1">
-                                    <div class="th-circle-txt-wrap d-none d-xl-block" data-aos="fade-up">
-                                        <img class="circle" src="assets/img/designer/circle-text.png" height="150"
-                                            alt="">
-                                        <div class="th-icontext">
-                                            <img src="assets/img/logo/favicon.png" height="75" alt="">
-                                        </div>
-                                    </div>
-
                                     <div class="p-relative">
-                                        <div class="th-hero-right-thumb d-none d-xl-block" data-aos="fade-up">
-                                            <img class="profile" src="assets/img/devceloper/profile.png" alt="">
+                                        <div class="th-hero-right-thumb d-none d-xl-block" data-aos="fade-up" style="position: relative; z-index: 1;">
+                                            <img class="profile" src="assets/img/profile/hero-profile.webp" alt="" style="object-fit: cover; object-position: top; height: 500px !important; border-radius: 16px; margin-top: -30px;">
                                             <div class="th-rotate-text p-relative">
                                                 <p class="th-scroll-dwn-text th-upper"><a href="#about">Scroll Down
                                                         <span><img src="assets/img/icon/th-dwn-arrow.png"
                                                                 alt=""></span></a>
                                                 </p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="th-circle-txt-wrap d-none d-xl-block" data-aos="fade-up" style="position: absolute; bottom: -30px; right: -50px; z-index: 3;">
+                                            <img class="circle" src="assets/img/designer/circle-text.png" height="150"
+                                                alt="">
+                                            <div class="th-icontext">
+                                                <img src="assets/img/logo/favicon.png" height="75" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -599,96 +580,166 @@
 
         <!-- =========== about area start =========== -->
 
-        <section id="about" class="th-about-area p-relative z-index-1 fix pt-120 pb-90">
+        <section id="about" class="th-about-area p-relative z-index-1 fix pt-120 pb-100">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="th-section-title mb-48">
-                            <p class="sub-title mb-16" data-aos="fade-up">{ABOUT ME}</p>
+                <div class="row g-5 align-items-stretch">
+                    <!-- Left Column: Greeting, Bio, Orbital Pic, Stats, Tech Grid -->
+                    <div class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between">
+                        <div class="th-about-left-top mb-40">
+                            <div class="row align-items-center g-4">
+                                <div class="col-md-7 col-sm-12">
+                                    <div class="th-about-badge mb-20">
+                                        <span class="exp-pulse-dot"></span> ABOUT ME
+                                    </div>
+                                    <h3 class="th-about-greeting">Hi, I'm</h3>
+                                    <h1 class="th-about-name">Huzaifa <span>Gulzar</span></h1>
+                                    <div class="th-about-role mb-25">
+                                        Full Stack Developer
+                                    </div>
+                                    <p class="th-about-bio mb-35">
+                                        I build fast, clean, and scalable web experiences that solve real problems and help businesses grow online. With modern tools and a passion for detail, I turn ideas into powerful digital solutions.
+                                    </p>
+                                    <div class="th-about-btns d-flex flex-nowrap align-items-center gap-3">
+                                        <a href="contact.html" class="th-btn-neon">Let's Connect <i class="fa-regular fa-arrow-up-right"></i></a>
+                                        <a href="assets/resume.pdf" class="th-btn-ghost" download>Download CV <i class="fa-regular fa-download"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-sm-12 text-center">
+                                    <div class="th-orbital-pic-wrap">
+                                        <div class="th-orbital-ring"></div>
+                                        <div class="th-orbital-ring-2"></div>
+                                        <div class="th-orbital-dot"></div>
+                                        <div class="th-orbital-pic">
+                                            <img src="assets/img/devceloper/727434179_122361696194004349_5517306137305908641_n.jpg" alt="Huzaifa Gulzar">
+                                        </div>
+                                        <div class="th-pic-badge">
+                                            <strong>1.5+</strong>
+                                            <span>Years of<br>Experience</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            <h2 class="title text-anime-style-2">
-                                I’m Huzaifa Gulzar, A Full Stack Developer Focused On
-                                <cite class="th-sm-img">
-                                    <img src="assets/img/designer/th-text-icon.png" alt="">
-                                </cite>
-                                <span>Building Modern Web Experiences</span>
-                                That Are Fast, Clean, And Purpose-Driven.
-                            </h2>
+                        <!-- Stats Grid Card -->
+                        <div class="th-about-stats-card mb-30" data-aos="fade-up">
+                            <div class="th-stat-item">
+                                <div class="th-stat-icon"><i class="fa-regular fa-code"></i></div>
+                                <div class="th-stat-info">
+                                    <h4 class="stat-num">50+</h4>
+                                    <p class="stat-label">Projects Completed</p>
+                                </div>
+                            </div>
+                            <div class="th-stat-item">
+                                <div class="th-stat-icon"><i class="fa-regular fa-user-group"></i></div>
+                                <div class="th-stat-info">
+                                    <h4 class="stat-num">20+</h4>
+                                    <p class="stat-label">Happy Clients</p>
+                                </div>
+                            </div>
+                            <div class="th-stat-item">
+                                <div class="th-stat-icon"><i class="fa-regular fa-clock"></i></div>
+                                <div class="th-stat-info">
+                                    <h4 class="stat-num">1.5+</h4>
+                                    <p class="stat-label">Years of Experience</p>
+                                </div>
+                            </div>
+                            <div class="th-stat-item">
+                                <div class="th-stat-icon"><i class="fa-regular fa-rocket"></i></div>
+                                <div class="th-stat-info">
+                                    <h4 class="stat-num">100%</h4>
+                                    <p class="stat-label">Commitment to Quality</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technologies Grid Card -->
+                        <div class="th-about-tech-card" data-aos="fade-up" data-aos-delay="100">
+                            <h4 class="th-tech-card-title">TECHNOLOGIES I WORK WITH</h4>
+                            <div class="th-tech-icons-grid">
+                                <div class="tech-icon-item"><img src="assets/img/icon/Laravel.png" alt="Laravel"><span>Laravel</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/php.svg" alt="PHP"><span>PHP</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/javascript.svg" alt="JavaScript"><span>JavaScript</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/React.png" alt="React"><span>React</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/Vue.svg" alt="Vue"><span>Vue.js</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/nodejs.svg" alt="Node.js"><span>Node.js</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/Mysql.png" alt="MySQL"><span>MySQL</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/redis.svg" alt="Redis"><span>Redis</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/tailwindcss.svg" alt="Tailwind"><span>Tailwind</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/github.svg" alt="Git"><span>Git</span></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-xl-4">
-                        <div class="p-relative mb-30">
-                            <h2 class="th-exp-title"><span class="count">3</span></h2>
-                            <p class="th-exp-box">
-                                Years of Experience
-                            </p>
-                        </div>
-
-                        <div class="th-exp-grop-flex">
-                            <div class="th-exp-grop-flex-thumb">
-                                <img src="assets/img/designer/th-ex-group-thumb.png" alt="">
-                            </div>
-                            <div class="th-exp-grop-flex-content">
-                                <h3 class="title">(Trusted for practical web solutions)</h3>
-                                <div class="th-exp-box-review">
-                                    <ul>
-                                        <li><img src="assets/img/icon/th-star.png" alt=""></li>
-                                        <li><img src="assets/img/icon/th-star.png" alt=""></li>
-                                        <li><img src="assets/img/icon/th-star.png" alt=""></li>
-                                        <li><img src="assets/img/icon/th-star.png" alt=""></li>
-                                        <li><img src="assets/img/icon/th-star.png" alt=""></li>
-                                    </ul>
+                    <!-- Right Column: Current Role Dashboard Card -->
+                    <div class="col-xl-6 col-lg-12">
+                        <div class="th-about-role-card" data-aos="fade-left">
+                            <div class="th-role-header d-flex justify-content-between align-items-center mb-30">
+                                <div class="th-role-badge">
+                                    <span class="exp-pulse-dot"></span> CURRENT ROLE
+                                </div>
+                                <div class="th-role-yrs">
+                                    <span class="exp-pulse-dot" style="background: #DEFF00;"></span> 1.5+ yrs
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col-xl-8">
-                        <div class="th-about-box-wrap mb-30">
-                            <div class="th-section-title pb-32">
-                                <p class="para">
-                                    I’m Huzaifa Gulzar, a Full Stack Developer with hands-on experience in building
-                                    responsive,
-                                    scalable, and user-focused web applications. I work with modern frontend and backend
-                                    technologies including HTML, CSS, JavaScript, React, Next.js, PHP, Laravel, and
-                                    MySQL.
-                                    My focus is to create clean interfaces, strong backend systems, and smooth digital
-                                    experiences that solve real problems and help businesses grow online.
-                                </p>
+                            <div class="th-role-company d-flex align-items-center justify-content-between mb-30 pb-25">
+                                <div>
+                                    <h3 class="role-title mb-1">Full Stack Developer</h3>
+                                    <p class="role-sub mb-0">At Bitlogicx</p>
+                                </div>
+                                <a href="https://bitlogicx.com/" target="_blank" rel="noopener noreferrer" title="Visit Bitlogicx" style="display: inline-block;">
+                                    <img src="assets/img/logo/bitlogicx.png" alt="Bitlogicx" class="bitlogicx-logo-badge">
+                                </a>
                             </div>
 
-                            <div class="th-circle-box-grid">
-                                <div class="th-circle-box-grid-singlebox" data-aos="fade-up">
-                                    <div class="th-icon pb-16">
-                                        <span><img src="assets/img/icon/th-down-arrow.png" alt=""></span>
-                                    </div>
-                                    <div class="th-content">
-                                        <h3 class="title"><a href="#">Frontend Development</a></h3>
+                            <div class="th-role-features-list mb-35">
+                                <div class="role-feature-item">
+                                    <div class="feature-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="feature-text">
+                                        <strong>SaaS Platforms End-to-End:</strong> Build & maintain SaaS platforms using Laravel, PHP, React, Vue.js, MySQL, Redis.
                                     </div>
                                 </div>
-
-                                <div class="th-circle-box-grid-singlebox" data-aos="fade-up">
-                                    <div class="th-icon pb-16">
-                                        <span><img src="assets/img/icon/th-down-arrow.png" alt=""></span>
-                                    </div>
-                                    <div class="th-content">
-                                        <h3 class="title"><a href="#">Laravel Development</a></h3>
+                                <div class="role-feature-item">
+                                    <div class="feature-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="feature-text">
+                                        <strong>REST API Integration:</strong> Design & integrate REST APIs — payments, maps, multi-currency, hotel/booking systems.
                                     </div>
                                 </div>
-
-                                <div class="th-circle-box-grid-singlebox" data-aos="fade-up">
-                                    <div class="th-icon pb-16">
-                                        <span><img src="assets/img/icon/th-down-arrow.png" alt=""></span>
+                                <div class="role-feature-item">
+                                    <div class="feature-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="feature-text">
+                                        <strong>Real-time & AI Modules:</strong> Implement real-time features (WebSockets/Pusher), AI-powered modules (RAG chatbots, LLM integration), and admin dashboards.
                                     </div>
-                                    <div class="th-content">
-                                        <h3 class="title"><a href="#">Full Stack Solutions</a></h3>
+                                </div>
+                                <div class="role-feature-item">
+                                    <div class="feature-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="feature-text">
+                                        <strong>Performance Optimization:</strong> Improve performance, audits, image pipelines, bundle splitting, DB query tuning, Redis caching.
+                                    </div>
+                                </div>
+                                <div class="role-feature-item">
+                                    <div class="feature-check"><i class="fa-solid fa-check"></i></div>
+                                    <div class="feature-text">
+                                        <strong>DevOps & Server Management:</strong> Handle deployment, server management — Linux/Nginx VPS (aaPanel), SSL, DNS, CI/CD.
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="th-role-tools">
+                                <h5 class="tools-title mb-16">TOOLS & ENVIRONMENTS</h5>
+                                <div class="th-tools-tags d-flex flex-wrap gap-2">
+                                    <span class="tool-tag">Laravel</span>
+                                    <span class="tool-tag">PHP 8+</span>
+                                    <span class="tool-tag">React</span>
+                                    <span class="tool-tag">Vue.js</span>
+                                    <span class="tool-tag">MySQL</span>
+                                    <span class="tool-tag">Redis</span>
+                                    <span class="tool-tag">WebSockets</span>
+                                    <span class="tool-tag">AI / LLM</span>
+                                    <span class="tool-tag">Linux / aaPanel</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -699,10 +750,10 @@
         <!-- =========== about area end =========== -->
 
         <!-- =========== service area start =========== -->
-        <section class="th-service-area fix parallaxie pt-120 pb-90"
-            style="background-image: url(./assets/img/designer/th-service-bg.png);">
-            <div class="container">
-                <div class="row">
+        <section class="th-service-area parallaxie pt-120 pb-90"
+            style="background-image: none; overflow: visible;">
+            <div class="container-fluid" style="margin:0px !important; padding: 0 !important;">
+                <div class="row px-4">
                     <div class="col-xl-8 mx-auto text-center">
                         <div class="th-section-title mb-48">
                             <p class="sub-title mb-16" data-aos="fade-up">{MY SERVICES}</p>
@@ -714,95 +765,100 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xl-8 col-md-7 mb-30">
-                        <div class="th-serviceboxwrap p-relative">
-                            <div class="th-service-thumb reveal image-anime">
-                                <img class="w-100" src="assets/img/designer/th-service-thumb1.1.webp" alt="">
+                <!-- Slide 1 -->
+                <div class="sticky-slide" style="z-index: 1; background-image: none;">
+                    <div class="row w-100 m-0">
+                        <!-- Left Column: Image -->
+                        <div class="col-md-6 p-0 d-flex align-items-center">
+                            <div class="th-serviceboxwrap p-relative w-100">
+                                <div class="th-service-thumb image-anime">
+                                    <a class="popup-image" href="assets/img/designer/th-service-thumb1.1.webp" data-title="Frontend Web Development" data-details="High-performance, dynamic user interfaces built with React, Vue, and Tailwind CSS optimized for Core Web Vitals and SEO." data-tech="React.js, Vue.js, TypeScript, Tailwind CSS, Vite, JavaScript ES6+"><img class="w-100" src="assets/img/designer/th-service-thumb1.1.webp" style="object-fit: cover;" alt="Frontend Development"></a>
+                                </div>
+                                <div class="th-numbox">
+                                    <span class="th-num">01</span>
+                                </div>
                             </div>
-                            <div class="th-numbox">
-                                <span class="th-num">01</span>
+                        </div>
+                        <!-- Right Column: Text -->
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
+                                <h3 class="th-title pb-12"><a href="service-details.html">Frontend Development</a></h3>
+                                <p class="th-desc">I build modern, responsive, and smooth user interfaces using HTML, CSS, JavaScript, React, Next.js, and Tailwind CSS with a strong focus on clean design and performance.</p>
+                                <a href="#" class="th-more-btn mt-40">Explore My Services</a>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-xl-4 col-md-5 mb-30">
-                        <div class="th-service-iconbox" data-aos="fade-left">
-                            <span class="th-icon mb-24">
-                                <img src="assets/img/icon/th-service-icon1.1.svg" alt="">
-                            </span>
-
-                            <h3 class="th-title pb-12">
-                                <a href="service-details.html">Frontend Development</a>
-                            </h3>
-
-                            <p class="th-desc">
-                                I build modern, responsive, and smooth user interfaces using HTML, CSS, JavaScript,
-                                React, Next.js, and Tailwind CSS with a strong focus on clean design and performance.
-                            </p>
-
-                            <a href="#" class="th-more-btn mt-40">Explore My Services</a>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4 col-md-5 mb-30">
-                        <div class="th-service-iconbox" data-aos="fade-right">
-                            <span class="th-icon mb-24">
-                                <img src="assets/img/icon/th-service-icon1.1.svg" alt="">
-                            </span>
-
-                            <h3 class="th-title pb-12">
-                                <a href="service-details.html">Backend & Laravel Development</a>
-                            </h3>
-
-                            <p class="th-desc">
-                                I develop secure, scalable, and well-structured backend systems using PHP, Laravel,
-                                MySQL, APIs, authentication, dashboards, and business logic for real-world applications.
-                            </p>
-
-                            <a href="#" class="th-more-btn mt-40">Explore My Services</a>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-8 col-md-7 mb-30">
-                        <div class="th-serviceboxwrap p-relative">
-                            <div class="th-service-thumb reveal image-anime">
-                                <img class="w-100" src="assets/img/designer/th-service-thumb1.2.png" alt="">
+                <!-- Slide 2 -->
+                <div class="sticky-slide" style="z-index: 2;">
+                    <div class="row w-100 m-0">
+                        <div class="col-md-6 p-0 d-flex align-items-center">
+                            <div class="th-serviceboxwrap p-relative w-100">
+                                <div class="th-service-thumb image-anime">
+                                    <a class="popup-image" href="assets/img/designer/laravel-backend.png" data-title="Backend & Laravel Development" data-details="Enterprise-grade REST APIs, robust database architecture, and scalable server management built with Laravel and modern PHP 8+." data-tech="Laravel 10, PHP 8+, MySQL, Redis, REST APIs, Nginx, Linux"><img class="w-100" src="assets/img/designer/laravel-backend.png" style="object-fit: cover;" alt="Backend & Laravel Development"></a>
+                                </div>
+                                <div class="th-numbox">
+                                    <span class="th-num th-num-2">02</span>
+                                </div>
                             </div>
-                            <div class="th-numbox">
-                                <span class="th-num th-num-2">02</span>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
+                                <h3 class="th-title pb-12"><a href="service-details.html">Backend & Laravel Development</a></h3>
+                                <p class="th-desc">I develop secure, scalable, and well-structured backend systems using PHP, Laravel, MySQL, APIs, authentication, dashboards, and business logic for real-world applications.</p>
+                                <a href="#" class="th-more-btn mt-40">Explore My Services</a>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-xl-8 col-md-7 mb-30">
-                        <div class="th-serviceboxwrap p-relative">
-                            <div class="th-service-thumb reveal image-anime">
-                                <img class="w-100" src="assets/img/designer/th-service-thumb1.3.png" alt="">
+                <!-- Slide 3 -->
+                <div class="sticky-slide" style="z-index: 3;">
+                    <div class="row w-100 m-0">
+                        <div class="col-md-6 p-0 d-flex align-items-center">
+                            <div class="th-serviceboxwrap p-relative w-100">
+                                <div class="th-service-thumb image-anime">
+                                    <a class="popup-image" href="assets/img/designer/fullstack-solutions.png" data-title="Full Stack Web Solutions" data-details="End-to-end SaaS platforms with responsive UI/UX, real-time WebSocket data synchronization, and cloud infrastructure." data-tech="Vue.js, React, Node.js, Laravel, WebSockets, Pusher, Cloud"><img class="w-100" src="assets/img/designer/fullstack-solutions.png" style="object-fit: cover;" alt="Full Stack Web Solutions"></a>
+                                </div>
+                                <div class="th-numbox">
+                                    <span class="th-num">03</span>
+                                </div>
                             </div>
-                            <div class="th-numbox">
-                                <span class="th-num">03</span>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
+                                <h3 class="th-title pb-12"><a href="service-details.html">Full Stack Web Solutions</a></h3>
+                                <p class="th-desc">I create complete web solutions from frontend design to backend development, including admin panels, AI-powered modules, dynamic websites, API integrations, booking systems, and custom business tools.</p>
+                                <a href="#" class="th-more-btn mt-40">Explore My Services</a>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-xl-4 col-md-5 mb-30">
-                        <div class="th-service-iconbox" data-aos="fade-left">
-                            <span class="th-icon mb-24">
-                                <img src="assets/img/icon/th-service-icon1.1.svg" alt="">
-                            </span>
-
-                            <h3 class="th-title pb-12">
-                                <a href="service-details.html">Full Stack Web Solutions</a>
-                            </h3>
-
-                            <p class="th-desc">
-                                I create complete web solutions from frontend design to backend development, including
-                                admin panels, dynamic websites, API integrations, booking systems, and custom business
-                                tools.
-                            </p>
-
-                            <a href="#" class="th-more-btn mt-40">Explore My Services</a>
+                <!-- Slide 4 -->
+                <div class="sticky-slide" style="z-index: 4;">
+                    <div class="row w-100 m-0">
+                        <div class="col-md-6 p-0 d-flex align-items-center">
+                            <div class="th-serviceboxwrap p-relative w-100">
+                                <div class="th-service-thumb image-anime">
+                                    <a class="popup-image" href="assets/img/designer/ai-llm-dashboard.png" data-title="AI & LLM Integration" data-details="Next-generation intelligent applications featuring RAG chatbots, OpenAI & Claude AI integrations, and automated workflows." data-tech="OpenAI API, Claude AI, RAG, Python, Vector DB, LLM Agents"><img class="w-100" src="assets/img/designer/ai-llm-dashboard.png" style="object-fit: cover;" alt="AI & LLM Integration Dashboard"></a>
+                                </div>
+                                <div class="th-numbox">
+                                    <span class="th-num">04</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
+                                <h3 class="th-title pb-12"><a href="service-details.html">AI & LLM Integration</a></h3>
+                                <p class="th-desc">I design and integrate cutting-edge AI features into web applications—including RAG (Retrieval-Augmented Generation) chatbots, custom LLM pipelines, real-time neural search, and automated AI workflows for intelligent digital experiences.</p>
+                                <a href="#" class="th-more-btn mt-40">Explore My Services</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -849,45 +905,44 @@
                     </div>
                     <div class="skills-grid">
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/html5.svg" alt="HTML"></div>
-                            <p>HTML</p>
+                            <div class="th-icon"><img src="assets/img/icon/Laravel.png" alt="Laravel / PHP 8+"></div>
+                            <p>LARAVEL / PHP 8+</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/css3.svg" alt="CSS"></div>
-                            <p>CSS</p>
+                            <div class="th-icon"><img src="assets/img/icon/React.png" alt="React & Vue.js"></div>
+                            <p>REACT & VUE.JS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/sass.svg" alt="SASS"></div>
-                            <p>SASS</p>
+                            <div class="th-icon"><img src="assets/img/icon/Mysql.png" alt="MySQL & Redis"></div>
+                            <p>MYSQL & REDIS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/javascript.svg" alt="JavaScript"></div>
-                            <p>JAVASCRIPT</p>
+                            <div class="th-icon"><img src="assets/img/icon/api-websockets.svg" alt="REST & Third-Party APIs"></div>
+                            <p>REST & 3RD-PARTY APIS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/react-new.svg" alt="React JS"></div>
-                            <p>REACT JS</p>
+                            <div class="th-icon"><img src="assets/img/icon/ai-llm.svg" alt="AI / LLM Integration"></div>
+                            <p>AI / LLM INTEGRATION</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/github.svg" class="filter-white"
-                                    alt="Github"></div>
-                            <p>GITHUB</p>
+                            <div class="th-icon"><img src="assets/img/icon/linux-devops.svg" alt="Nginx & aaPanel"></div>
+                            <p>NGINX & AAPANEL</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/nodejs.svg" alt="Node JS"></div>
-                            <p>NODE JS</p>
+                            <div class="th-icon"><img src="assets/img/icon/websockets.svg" alt="WebSockets & Pusher"></div>
+                            <p>WEBSOCKETS & PUSHER</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/firebase.svg" alt="Firebase"></div>
-                            <p>FIREBASE</p>
+                            <div class="th-icon"><img src="assets/img/icon/nodejs.svg" alt="Node.js"></div>
+                            <p>NODE.JS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/mongodb.svg" alt="MongoDB"></div>
-                            <p>MONGODB</p>
+                            <div class="th-icon"><img src="assets/img/icon/javascript.svg" alt="JavaScript & TypeScript"></div>
+                            <p>JS (ES6+) & TS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/docker.svg" alt="Dockers"></div>
-                            <p>DOCKERS</p>
+                            <div class="th-icon"><img src="assets/img/icon/github.svg" class="filter-white" alt="Git & CI/CD"></div>
+                            <p>GIT & CI/CD</p>
                         </div>
                     </div>
                 </div>
@@ -1060,8 +1115,7 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <iframe src="https://lens.scriptro.com/" frameborder="0"
-                                                        style="width: 100%; height: 100%; border: none;"></iframe>
+                                                    <img src="assets/img/projects/lens.png" alt="Lens Platform" style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <!-- th-project content -->
                                                 <div class="th-marketing-content" style="pointer-events: none;">
@@ -1078,8 +1132,7 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <iframe src="http://3guysburgersandgyros.com/" frameborder="0"
-                                                        style="width: 100%; height: 100%; border: none;"></iframe>
+                                                    <img src="assets/img/projects/3guy.png" alt="3 Guys Burgers & Gyros" style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <!-- th-project content -->
                                                 <div class="th-marketing-content" style="pointer-events: none;">
@@ -1096,8 +1149,7 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <iframe src="https://discoveryholidaystravel.com/" frameborder="0"
-                                                        style="width: 100%; height: 100%; border: none;"></iframe>
+                                                    <img src="assets/img/projects/discovery.png" alt="Discovery Holidays Travel" style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <!-- th-project content -->
                                                 <div class="th-marketing-content" style="pointer-events: none;">
@@ -1114,9 +1166,7 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <iframe src="https://resumeamplifiers.com/index.php/home"
-                                                        frameborder="0"
-                                                        style="width: 100%; height: 100%; border: none;"></iframe>
+                                                    <img src="assets/img/projects/biz.png" alt="Resume Amplifiers" style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <!-- th-project content -->
                                                 <div class="th-marketing-content" style="pointer-events: none;">
