@@ -689,6 +689,7 @@
   transition: 0.3s;
   opacity: 0;
   visibility: hidden;
+  z-index: 2;
 }
 
 .profile {
@@ -10046,6 +10047,25 @@ only screen and (min-width: 768px) and (max-width: 991px),
 .th-skill-wrap-thumb img {
   height: 556px;
   border-radius: 16px;
+}
+
+.th-skill-wrap-thumb::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.th-skill-wrap:hover .th-skill-wrap-thumb::after {
+  opacity: 1;
 }
 
 .th-skill-box {
