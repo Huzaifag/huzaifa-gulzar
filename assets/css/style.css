@@ -697,11 +697,31 @@
   object-position: top center;
 }
 
-.th-skill-wrap:hover .th-skill-btn {
+.th-skill-wrap:hover .th-skill-btn,
+.th-slide-image:hover .th-skill-btn {
   top: 50%;
   transition: 0.3s;
   opacity: 1;
   visibility: visible;
+}
+
+.iframe-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.th-slide-image:hover .iframe-container::after {
+  opacity: 1;
 }
 
 .th-skil-btn-2 {
