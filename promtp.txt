@@ -1,0 +1,63 @@
+Use the frontend-design skill. Rebuild the hero h1 as a rotating-word headline. Hero only, keep everything else. Show plan first.
+
+## Font
+- Add Instrument Serif (italic 400 only) from Google Fonts with preconnect + display=swap.
+
+## Headline
+Line 1: "I build SaaS"
+Line 2: "with" + rotating phrase
+
+Rotating phrases, in order:
+1. "AI inside."
+2. "pixel-perfect UI."
+3. "UX that converts."
+4. "real-time sync."
+
+## Markup (accessibility + SEO)
+<h1 class="hero-title">
+  <span class="sr-only">I build SaaS with AI inside, pixel-perfect UI, and UX that converts.</span>
+  <span aria-hidden="true">
+    <span class="line">I build SaaS</span>
+    <span class="line">
+      <em class="serif">with</em>
+      <span class="rotator">
+        <span class="rotator-item is-active">AI inside.</span>
+        <span class="rotator-item">pixel-perfect UI.</span>
+        <span class="rotator-item">UX that converts.</span>
+        <span class="rotator-item">real-time sync.</span>
+      </span>
+    </span>
+  </span>
+</h1>
+
+## Styling
+- Sentence case. Remove text-transform: uppercase ("SaaS" must keep correct casing).
+- Size: clamp(2.5rem, 5.2vw, 4.75rem), line-height ~1.0. Smaller than current.
+- "I build SaaS": existing grotesk, weight 800, #fafafa, letter-spacing -0.035em.
+- "with": Instrument Serif italic 400, #a1a1aa, ~1.08em to optically match grotesk.
+- Rotating phrase: grotesk 800, lime (#d9ff00 or existing lime variable).
+- Remove the old lime marker highlight on "AI" (rotator replaces it).
+
+## Rotator mechanics
+- .rotator: display inline-grid. All items share one cell (grid-area: 1 / 1) so width = longest phrase. No layout shift.
+- Inactive items: opacity 0, translateY(0.4em), filter blur(4px).
+- Active item: opacity 1, translateY(0), blur(0). Transition ~450ms ease-out.
+- Leaving item: moves up (translateY(-0.4em)) while fading out.
+- Interval: 2600ms per phrase.
+- Pause rotation when tab hidden (visibilitychange) or hero off-screen (IntersectionObserver).
+- Optional: thin lime underline under the rotating phrase that shrinks to 0 and regrows on each swap (like a progress bar for the interval). Skip if it feels busy.
+
+## Reduced motion
+- @media (prefers-reduced-motion: reduce): no rotation, show "AI inside." statically.
+- JS must check matchMedia('(prefers-reduced-motion: reduce)') before starting the interval.
+
+## Mobile
+- 375px: "pixel-perfect UI." must fit one line. If not, reduce font-size at that breakpoint. Rotating phrase can sit on its own line under "with" on mobile.
+
+## Subline (update to reflect UI/UX)
+"Booking platforms, HR and payroll systems, AI chatbots. Designed and built end to end with Laravel, React and Vue."
+
+## Tag above headline
+"Full Stack Developer · UI/UX · Lahore"
+
+Report files changed when done.
