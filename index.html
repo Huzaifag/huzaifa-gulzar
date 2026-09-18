@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        try {
+            if (localStorage.getItem('portfolio-theme') === 'light') {
+                document.documentElement.dataset.theme = 'light';
+            }
+        } catch (error) { /* The site still works when storage is unavailable. */ }
+    </script>
     <title>Huzaifa Gulzar - Portfolio</title>
 
     <!-- fav logo -->
@@ -30,30 +37,52 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         /* ── overflow fix (sticky sections) ── */
-        html, body { overflow-x: clip !important; }
+        html,
+        body {
+            overflow-x: clip !important;
+        }
 
         /* ── sticky service slides ── */
         .sticky-slide {
-            position: sticky; top: 0;
-            height: 100vh; min-height: 700px;
-            display: flex; align-items: center;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
             background-color: #0a0a0a;
-            box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
         }
-        .sticky-slide .row            { height: 90vh; min-height: 640px; }
-        .sticky-slide .col-md-6       { height: 100%; }
+
+        .sticky-slide .row {
+            height: 90vh;
+            min-height: 640px;
+        }
+
+        .sticky-slide .col-md-6 {
+            height: 100%;
+        }
+
         .sticky-slide .th-serviceboxwrap,
-        .sticky-slide .th-service-thumb { height: 100%; }
+        .sticky-slide .th-service-thumb {
+            height: 100%;
+        }
+
         .sticky-slide .th-service-thumb img {
-            height: 100% !important; max-height: 100% !important;
-            width: 100% !important; object-fit: cover !important;
+            height: 100% !important;
+            max-height: 100% !important;
+            width: 100% !important;
+            object-fit: cover !important;
             border-radius: 0 !important;
         }
+
         .sticky-slide .th-service-iconbox {
             height: 100%;
-            display: flex !important; flex-direction: column !important;
+            display: flex !important;
+            flex-direction: column !important;
             justify-content: center !important;
         }
+
         .sticky-slide:not(:first-of-type) {
             background-image: url(assets/img/designer/th-service-bg.png);
         }
@@ -87,17 +116,17 @@
         .th-header-area .th-logo img {
             height: 42px !important;
             width: auto;
-            filter: drop-shadow(0 10px 24px rgba(0,0,0,0.35));
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
             transition: height 0.35s ease, filter 0.35s ease;
         }
 
         .th-header-area .th-main-menu {
             position: relative;
-            background: rgba(14,14,14,0.72) !important;
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(14, 14, 14, 0.72) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 999px !important;
             padding: 3px !important;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 18px 45px rgba(0,0,0,0.22);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 45px rgba(0, 0, 0, 0.22);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
         }
@@ -119,7 +148,7 @@
             padding: 12px 24px !important;
             border: 1px solid transparent;
             border-radius: 999px;
-            color: rgba(251,251,251,0.78) !important;
+            color: rgba(251, 251, 251, 0.78) !important;
             font-size: 13px !important;
             line-height: 1 !important;
             font-weight: 700 !important;
@@ -132,17 +161,17 @@
         .th-header-area .th-main-menu ul>li>a:focus-visible,
         .th-header-area .th-main-menu ul>li:first-child>a {
             color: #DEFF00 !important;
-            background: rgba(222,255,0,0.07);
-            border-color: rgba(222,255,0,0.9);
-            box-shadow: 0 0 26px rgba(222,255,0,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+            background: rgba(222, 255, 0, 0.07);
+            border-color: rgba(222, 255, 0, 0.9);
+            box-shadow: 0 0 26px rgba(222, 255, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
             transform: translateY(-1px);
         }
 
         .th-header-sticky.header-sticky {
             padding: 8px 0 !important;
-            background: linear-gradient(180deg, rgba(12,12,12,0.86), rgba(12,12,12,0.62)) !important;
-            border-bottom-color: rgba(255,255,255,0.10);
-            box-shadow: 0 24px 60px rgba(0,0,0,0.42);
+            background: linear-gradient(180deg, rgba(12, 12, 12, 0.86), rgba(12, 12, 12, 0.62)) !important;
+            border-bottom-color: rgba(255, 255, 255, 0.10);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
             backdrop-filter: blur(22px) saturate(150%);
             -webkit-backdrop-filter: blur(22px) saturate(150%);
             animation: none !important;
@@ -154,36 +183,65 @@
 
         .th-header-sticky.header-sticky .th-logo img {
             height: 38px !important;
-            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.28));
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.28));
         }
 
         .th-header-sticky.header-sticky .th-main-menu {
-            background: rgba(255,255,255,0.065) !important;
-            border-color: rgba(255,255,255,0.14);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 16px 40px rgba(0,0,0,0.28);
+            background: rgba(255, 255, 255, 0.065) !important;
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 16px 40px rgba(0, 0, 0, 0.28);
         }
 
         @media (max-width: 1024px) {
-            .th-header-area { padding: 12px 0 !important; }
-            .th-header-area .th-header-wrapper { padding: 0 24px !important; min-height: 56px; }
-            .th-header-area .th-logo img { height: 38px !important; }
+            .th-header-area {
+                padding: 12px 0 !important;
+            }
+
+            .th-header-area .th-header-wrapper {
+                padding: 0 24px !important;
+                min-height: 56px;
+            }
+
+            .th-header-area .th-logo img {
+                height: 38px !important;
+            }
         }
 
         @media (max-width: 575px) {
-            .th-header-area { padding: 10px 0 !important; }
-            .th-header-area .th-header-wrapper { padding: 0 16px !important; min-height: 52px; }
-            .th-header-area .th-logo img { height: 34px !important; }
+            .th-header-area {
+                padding: 10px 0 !important;
+            }
+
+            .th-header-area .th-header-wrapper {
+                padding: 0 16px !important;
+                min-height: 52px;
+            }
+
+            .th-header-area .th-logo img {
+                height: 34px !important;
+            }
         }
 
         /* Desktop ≥1024px: show nav, hide MENU button */
         @media (min-width: 1024px) {
-            .th-header-area .th-main-menu { display: block !important; }
-            .th-header-action-item        { display: none !important; }
+            .th-header-area .th-main-menu {
+                display: block !important;
+            }
+
+            .th-header-action-item {
+                display: none !important;
+            }
         }
+
         /* Mobile <1024px: hide nav links, show MENU */
         @media (max-width: 1023px) {
-            .th-header-area .th-main-menu { display: none !important; }
-            .th-header-action-item        { display: block !important; }
+            .th-header-area .th-main-menu {
+                display: none !important;
+            }
+
+            .th-header-action-item {
+                display: block !important;
+            }
         }
 
         /* Header "Hire Me" → ghost style */
@@ -200,17 +258,22 @@
             font-weight: 800 !important;
             padding: 0 28px !important;
             border-radius: 999px !important;
-            box-shadow: 0 18px 44px rgba(222,255,0,0.18);
+            box-shadow: 0 18px 44px rgba(222, 255, 0, 0.18);
             transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
+
         .th-header-btn .th-primary-btn-secondary2:hover {
             border-color: #DEFF00 !important;
             background: #DEFF00 !important;
             color: #0E0E0E !important;
             transform: translateY(-2px);
-            box-shadow: 0 24px 52px rgba(222,255,0,0.28);
+            box-shadow: 0 24px 52px rgba(222, 255, 0, 0.28);
         }
-        .th-header-btn .th-primary-btn-secondary2 .th-icon { display: none !important; }
+
+        .th-header-btn .th-primary-btn-secondary2 .th-icon {
+            display: none !important;
+        }
+
         .th-header-btn .th-primary-btn-secondary2 .th-text {
             padding: 0 !important;
             margin: 0 !important;
@@ -234,7 +297,7 @@
         }
 
         .th-header-area .th-menu-btn {
-            background: rgba(14,14,14,0.54);
+            background: rgba(14, 14, 14, 0.54);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
         }
@@ -246,10 +309,10 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
             color: #FBFBFB;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 12px 26px rgba(0,0,0,0.18);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 12px 26px rgba(0, 0, 0, 0.18);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             opacity: 0.62;
@@ -281,24 +344,33 @@
             justify-content: flex-end;
             isolation: isolate;
         }
+
         /* hide any residual theme scroll-circle or diagonal shapes */
         .th-banner-area.th-banner-area-1 .th-scroll-down,
         .th-banner-area.th-banner-area-1 .scroll-down,
-        .th-banner-area.th-banner-area-1 .th-scroll-circle { display: none !important; }
+        .th-banner-area.th-banner-area-1 .th-scroll-circle {
+            display: none !important;
+        }
+
         /* mask main element background from bleeding into hero */
-        .th-banner-area.th-banner-area-1 { overflow: hidden; }
+        .th-banner-area.th-banner-area-1 {
+            overflow: hidden;
+        }
+
         .th-banner-area.th-banner-area-1 .th-banner-content-wrapper {
             min-height: calc(100svh - 88px);
             display: flex;
             align-items: center;
             padding: 150px 80px 128px !important;
         }
+
         @media (max-width: 1024px) {
             .th-banner-area.th-banner-area-1 .th-banner-content-wrapper {
                 min-height: auto;
                 padding: 124px 24px 110px !important;
             }
         }
+
         @media (max-width: 575px) {
             .th-banner-area.th-banner-area-1 .th-banner-content-wrapper {
                 padding: 104px 16px 96px !important;
@@ -308,44 +380,62 @@
         /* Lime radial glow behind headline */
         .th-banner-area.th-banner-area-1::before {
             content: '';
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background:
-                radial-gradient(ellipse 60% 70% at 10% 55%, rgba(222,255,0,0.12) 0%, rgba(222,255,0,0.03) 28%, transparent 62%),
-                linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.98) 34%, rgba(5,5,5,0.82) 49%, rgba(5,5,5,0.42) 66%, rgba(5,5,5,0.14) 100%),
-                radial-gradient(ellipse 28% 100% at 51% 50%, rgba(5,5,5,0.74) 0%, rgba(5,5,5,0.48) 34%, transparent 72%),
-                linear-gradient(180deg, rgba(5,5,5,0.42) 0%, rgba(5,5,5,0.10) 42%, rgba(5,5,5,0.76) 100%);
-            pointer-events: none; z-index: 0;
+                radial-gradient(ellipse 60% 70% at 10% 55%, rgba(222, 255, 0, 0.12) 0%, rgba(222, 255, 0, 0.03) 28%, transparent 62%),
+                linear-gradient(90deg, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0.98) 34%, rgba(5, 5, 5, 0.82) 49%, rgba(5, 5, 5, 0.42) 66%, rgba(5, 5, 5, 0.14) 100%),
+                radial-gradient(ellipse 28% 100% at 51% 50%, rgba(5, 5, 5, 0.74) 0%, rgba(5, 5, 5, 0.48) 34%, transparent 72%),
+                linear-gradient(180deg, rgba(5, 5, 5, 0.42) 0%, rgba(5, 5, 5, 0.10) 42%, rgba(5, 5, 5, 0.76) 100%);
+            pointer-events: none;
+            z-index: 0;
         }
+
         /* Subtle grid atmosphere */
         .th-banner-area.th-banner-area-1::after {
             content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(90deg, rgba(5,5,5,0.88) 0%, rgba(5,5,5,0.38) 43%, transparent 63%);
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(5, 5, 5, 0.88) 0%, rgba(5, 5, 5, 0.38) 43%, transparent 63%);
             opacity: 0.55;
-            pointer-events: none; z-index: 0;
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* ── Hero subtitle tag ── */
         .th-banner-content .th-subtitle {
             display: inline-flex !important;
-            align-items: center; gap: 8px;
+            align-items: center;
+            gap: 8px;
             padding: 0 !important;
             font-size: 13px !important;
-            color: rgba(255,255,255,0.68) !important;
+            color: rgba(255, 255, 255, 0.68) !important;
             background: transparent !important;
             border: 0 !important;
             text-transform: uppercase;
             letter-spacing: 0.26em;
         }
+
         .th-banner-content .th-subtitle::before {
             content: '';
-            flex-shrink: 0; width: 7px; height: 7px;
-            border-radius: 50%; background: #DEFF00;
+            flex-shrink: 0;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #DEFF00;
             animation: hero-dot-pulse 2.5s ease-in-out infinite;
         }
+
         @keyframes hero-dot-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(222,255,0,0.5); }
-            50%       { box-shadow: 0 0 0 5px rgba(222,255,0,0); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(222, 255, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 0 5px rgba(222, 255, 0, 0);
+            }
         }
 
         /* ── Hero headings ── */
@@ -355,6 +445,7 @@
             letter-spacing: -0.03em !important;
             color: #FBFBFB !important;
         }
+
         /* h2: flip to solid white — key words should be high-contrast */
         .th-banner-content .th-title2 {
             font-size: clamp(3.5rem, 8vw, 7.5rem) !important;
@@ -371,19 +462,22 @@
         .hero-subline {
             font-size: 20px;
             line-height: 1.55;
-            color: rgba(255,255,255,0.72);
+            color: rgba(255, 255, 255, 0.72);
             margin-top: 24px;
             max-width: 640px;
             text-wrap: balance;
             font-family: "Inter Tight", sans-serif;
         }
+
         @media (max-width: 575px) {
-            .hero-subline { font-size: 14px; }
+            .hero-subline {
+                font-size: 14px;
+            }
         }
 
         .hero-tech-stack {
             margin-top: 14px;
-            color: rgba(255,255,255,0.56);
+            color: rgba(255, 255, 255, 0.56);
             font-family: "Inter Tight", sans-serif;
             font-size: 13px;
             font-weight: 700;
@@ -398,12 +492,14 @@
             margin-top: 34px !important;
             margin-bottom: 0 !important;
         }
+
         .th-banner-content .th-banner-btn-wrap {
             display: flex;
             align-items: center;
             gap: 34px;
             flex-wrap: wrap;
         }
+
         .th-banner-content .th-primary-btn .th-icon {
             width: 62px;
             height: 62px;
@@ -415,6 +511,7 @@
             color: #0E0E0E;
             font-size: 18px;
         }
+
         .th-banner-content .th-primary-btn .th-text {
             min-height: 62px;
             display: inline-flex;
@@ -425,61 +522,84 @@
             font-weight: 800;
             padding: 0 34px !important;
         }
+
         /* "View Projects" ghost button */
         .hero-btn-ghost {
-            display: inline-flex; align-items: center; gap: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #FBFBFB; font-size: 14px; font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FBFBFB;
+            font-size: 14px;
+            font-weight: 600;
             min-height: 62px;
-            padding: 0 34px; border-radius: 100px;
+            padding: 0 34px;
+            border-radius: 100px;
             transition: border-color 0.25s, color 0.25s;
             font-family: "Inter Tight", sans-serif;
-            text-transform: none; letter-spacing: 0;
+            text-transform: none;
+            letter-spacing: 0;
         }
+
         .hero-btn-ghost:hover {
-            border-color: #DEFF00; color: #DEFF00;
+            border-color: #DEFF00;
+            color: #DEFF00;
         }
 
         /* ── Stats strip ── */
         .hero-stats {
-            display: flex; gap: 36px;
-            margin-top: 56px; padding-top: 0;
+            display: flex;
+            gap: 36px;
+            margin-top: 56px;
+            padding-top: 0;
             border-top: 0;
         }
+
         @media (max-width: 575px) {
-            .hero-stats { gap: 20px; margin-top: 20px; }
+            .hero-stats {
+                gap: 20px;
+                margin-top: 20px;
+            }
         }
+
         .hero-stat-number {
             display: block;
             font-family: "Inter Tight", sans-serif;
-            font-size: 34px; font-weight: 800;
-            color: #F5F5F5;              /* white, not lime */
-            line-height: 1; letter-spacing: -0.5px;
+            font-size: 34px;
+            font-weight: 800;
+            color: #F5F5F5;
+            /* white, not lime */
+            line-height: 1;
+            letter-spacing: -0.5px;
         }
+
         .hero-stat-label {
-            display: block; font-size: 13px;
-            color: #9CA3AF;              /* ≥ WCAG AA on dark bg */
-            font-weight: 500; margin-top: 4px;
+            display: block;
+            font-size: 13px;
+            color: #9CA3AF;
+            /* ≥ WCAG AA on dark bg */
+            font-weight: 500;
+            margin-top: 4px;
         }
 
         .hero-stat-label {
             font-size: 16px;
-            color: rgba(255,255,255,0.68);
+            color: rgba(255, 255, 255, 0.68);
         }
 
-        .hero-stats > div {
+        .hero-stats>div {
             position: relative;
             min-width: 150px;
         }
 
-        .hero-stats > div:not(:last-child)::after {
+        .hero-stats>div:not(:last-child)::after {
             content: '';
             position: absolute;
             top: 0;
             right: -18px;
             width: 1px;
             height: 64px;
-            background: rgba(255,255,255,0.16);
+            background: rgba(255, 255, 255, 0.16);
         }
 
         .hero-copy-col {
@@ -494,13 +614,16 @@
 
         /* ── Profile image ── */
         .th-hero-right-thumb {
-            overflow: visible; /* badge is intentional overflow */
+            overflow: visible;
+            /* badge is intentional overflow */
         }
+
         .th-hero-right-thumb img.profile {
             width: auto !important;
             margin-left: 0 !important;
-            border: 1px solid rgba(255,255,255,0.1) !important; /* subtle neutral frame */
-            box-shadow: 0 24px 64px rgba(0,0,0,0.55);
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            /* subtle neutral frame */
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
         }
 
         .th-circle-txt-wrap {
@@ -548,42 +671,101 @@
         }
 
         /* Keep badge from bleeding into text column */
-        .col-xl-3 .p-relative { overflow: visible; }
+        .col-xl-3 .p-relative {
+            overflow: visible;
+        }
 
         /* ── Scroll Down: move to bottom-left of hero ── */
-        .th-rotate-text.p-relative { display: none; } /* hide original position */
+        .th-rotate-text.p-relative {
+            display: none;
+        }
+
+        /* hide original position */
         .hero-scroll-hint {
-            position: absolute; bottom: 28px; left: 80px;
-            display: flex; align-items: center; gap: 8px;
-            font-size: 11px; color: #6B6B6B; letter-spacing: 0.08em;
-            text-transform: uppercase; font-family: "Inter Tight", sans-serif;
+            position: absolute;
+            bottom: 28px;
+            left: 80px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #6B6B6B;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-family: "Inter Tight", sans-serif;
             z-index: 2;
         }
-        .hero-scroll-hint a { color: inherit; }
+
+        .hero-scroll-hint a {
+            color: inherit;
+        }
+
         .hero-scroll-hint::before {
             content: '';
-            display: block; width: 1px; height: 28px;
-            background: rgba(255,255,255,0.2);
+            display: block;
+            width: 1px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.2);
         }
-        @media (max-width: 1023px) { .hero-scroll-hint { display: none; } }
+
+        @media (max-width: 1023px) {
+            .hero-scroll-hint {
+                display: none;
+            }
+        }
 
         /* ══════════════════════════════════════
            MOTION — staggered fade-up on load
         ══════════════════════════════════════ */
         @keyframes hero-fade-up {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .th-banner-content .th-subtitle        { animation: hero-fade-up 0.5s ease both; animation-delay: 0ms; }
-        .th-banner-content .hero-title         { animation: hero-fade-up 0.5s ease both; animation-delay: 100ms; }
-        .th-banner-content .hero-subline       { animation: hero-fade-up 0.5s ease both; animation-delay: 280ms; }
-        .th-banner-content .th-banner-btn-wrap { animation: hero-fade-up 0.5s ease both; animation-delay: 400ms; }
-        .th-banner-content .hero-stats         { animation: hero-fade-up 0.5s ease both; animation-delay: 500ms; }
-        .th-hero-right-thumb                   { animation: hero-fade-up 0.5s ease both; animation-delay: 650ms; }
-        .hero-ai-card-wrap                     { animation: hero-fade-up 0.5s ease both; animation-delay: 800ms; }
+        .th-banner-content .th-subtitle {
+            animation: hero-fade-up 0.5s ease both;
+            animation-delay: 0ms;
+        }
+
+        .th-banner-content .hero-title {
+            animation: hero-fade-up 0.5s ease both;
+            animation-delay: 100ms;
+        }
+
+        .th-banner-content .hero-subline {
+            animation: hero-fade-up 0.5s ease both;
+            animation-delay: 280ms;
+        }
+
+        .th-banner-content .th-banner-btn-wrap {
+            animation: hero-fade-up 0.5s ease both;
+            animation-delay: 400ms;
+        }
+
+        .th-banner-content .hero-stats {
+            animation: hero-fade-up 0.5s ease both;
+            animation-delay: 500ms;
+        }
+
+        .th-hero-right-thumb {
+            animation: hero-fade-up 0.5s ease both;
+            animation-delay: 650ms;
+        }
+
+        .hero-ai-card-wrap {
+            animation: hero-fade-up 0.5s ease both;
+            animation-delay: 800ms;
+        }
 
         @media (prefers-reduced-motion: reduce) {
+
             .th-banner-content .th-subtitle,
             .th-banner-content .hero-title,
             .th-banner-content .hero-subline,
@@ -596,15 +778,25 @@
                 opacity: 1 !important;
                 transform: none !important;
             }
-            .rotator-item { transition: none !important; }
-            .hero-marquee-track { animation-play-state: paused !important; }
-            .ai-typing span { animation: none !important; }
+
+            .rotator-item {
+                transition: none !important;
+            }
+
+            .hero-marquee-track {
+                animation-play-state: paused !important;
+            }
+
+            .ai-typing span {
+                animation: none !important;
+            }
         }
 
         /* ══════════════════════════════════════
            FOCUS STATES (a11y)
         ══════════════════════════════════════ */
-        a:focus-visible, button:focus-visible {
+        a:focus-visible,
+        button:focus-visible {
             outline: 2px solid #DEFF00;
             outline-offset: 3px;
             border-radius: 3px;
@@ -620,13 +812,16 @@
                 background-size: auto 100%;
                 background-position: 72% bottom;
             }
+
             .hero-copy-col {
                 width: min(720px, 70vw) !important;
                 max-width: min(720px, 70vw) !important;
             }
+
             .hero-tech-marquee {
                 padding: 20px 24px;
             }
+
             .hero-tech-closing {
                 display: none;
             }
@@ -636,58 +831,98 @@
             .th-banner-area.th-banner-area-1 {
                 background-position: center bottom;
             }
+
             .th-banner-area.th-banner-area-1::before {
                 background:
-                    linear-gradient(90deg, rgba(5,5,5,0.96), rgba(5,5,5,0.70)),
-                    linear-gradient(180deg, rgba(5,5,5,0.36), rgba(5,5,5,0.84));
+                    linear-gradient(90deg, rgba(5, 5, 5, 0.96), rgba(5, 5, 5, 0.70)),
+                    linear-gradient(180deg, rgba(5, 5, 5, 0.36), rgba(5, 5, 5, 0.84));
             }
+
             .hero-copy-col {
                 width: 100% !important;
                 max-width: 100% !important;
             }
+
             .hero-title {
                 font-size: clamp(2.8rem, 10vw, 4.2rem);
             }
+
             .header-theme-toggle {
-                display: none;
+                width: 42px;
+                height: 42px;
+                flex: 0 0 42px;
             }
-            .th-hero-right-thumb { text-align: center; margin-top: 32px; }
-            .th-hero-right-thumb img.profile { width: 260px !important; height: auto !important; }
-            .th-circle-txt-wrap { display: none !important; }
+
+            .th-hero-right-thumb {
+                text-align: center;
+                margin-top: 32px;
+            }
+
+            .th-hero-right-thumb img.profile {
+                width: 260px !important;
+                height: auto !important;
+            }
+
+            .th-circle-txt-wrap {
+                display: none !important;
+            }
+
             .hero-tech-marquee {
                 position: relative;
                 padding: 18px 24px;
             }
+
             .hero-marquee-track {
                 justify-content: flex-start;
                 overflow-x: auto;
             }
+
             .hero-tech-label {
                 display: none;
             }
         }
+
         @media (max-width: 575px) {
             .th-banner-area.th-banner-area-1 {
                 background-size: auto 78%;
             }
-            .th-hero-right-thumb img.profile { width: 200px !important; }
-            .th-banner-btn-wrap { flex-direction: column !important; }
-            .th-banner-btn-wrap a { width: 100% !important; justify-content: center; }
-            .hero-btn-ghost { width: 100% !important; justify-content: center; }
+
+            .th-hero-right-thumb img.profile {
+                width: 200px !important;
+            }
+
+            .th-banner-btn-wrap {
+                flex-direction: column !important;
+            }
+
+            .th-banner-btn-wrap a {
+                width: 100% !important;
+                justify-content: center;
+            }
+
+            .hero-btn-ghost {
+                width: 100% !important;
+                justify-content: center;
+            }
+
             .hero-title {
                 font-size: clamp(2.35rem, 11vw, 3.1rem);
             }
+
             .hero-subline {
                 font-size: 15px;
             }
+
             .hero-stats {
                 gap: 18px;
                 flex-wrap: wrap;
             }
-            .hero-stats > div {
+
+            .hero-stats>div {
                 min-width: 120px;
             }
-            .hero-stats > div::after {
+
+            .hero-stats>div::after {
                 display: none;
             }
         }
@@ -696,9 +931,15 @@
            SR-ONLY (accessibility)
         ══════════════════════════════════════ */
         .sr-only {
-            position: absolute; width: 1px; height: 1px;
-            padding: 0; margin: -1px; overflow: hidden;
-            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         /* ══════════════════════════════════════
@@ -714,15 +955,18 @@
             -webkit-text-fill-color: #FAFAFA !important;
             margin: 0 0 0.15em;
         }
+
         .hero-title .line {
             display: block;
         }
+
         .hero-title .line--flex {
             display: flex;
             align-items: baseline;
             gap: 0.28em;
             flex-wrap: wrap;
         }
+
         .hero-title .serif {
             font-family: 'Instrument Serif', Georgia, serif;
             font-style: italic;
@@ -732,6 +976,7 @@
             font-size: 1.08em;
             letter-spacing: 0.01em;
         }
+
         .hero-accent {
             position: relative;
             display: inline-block;
@@ -739,12 +984,14 @@
             -webkit-text-fill-color: #D9FF00 !important;
             font-weight: 800;
         }
+
         .rotator {
             display: inline-grid;
             vertical-align: baseline;
             position: relative;
             padding-bottom: 0.04em;
         }
+
         .rotator-item {
             grid-area: 1 / 1;
             color: #D9FF00;
@@ -756,29 +1003,39 @@
             transition: opacity 0.45s ease-out, transform 0.45s ease-out, filter 0.45s ease-out;
             white-space: nowrap;
         }
+
         .rotator-item.is-active {
             opacity: 1;
             transform: translateY(0);
             filter: blur(0);
         }
+
         .rotator-item.is-leaving {
             opacity: 0;
             transform: translateY(-0.4em);
             filter: blur(4px);
         }
+
         /* Mobile: rotator phrase wraps below "with" naturally via flex-wrap */
         @media (max-width: 480px) {
-            .hero-title .line--flex { gap: 0.2em; }
-            .rotator-item { white-space: normal; }
+            .hero-title .line--flex {
+                gap: 0.2em;
+            }
+
+            .rotator-item {
+                white-space: normal;
+            }
         }
 
         /* ══════════════════════════════════════
            PHOTO ENHANCEMENTS
         ══════════════════════════════════════ */
         .th-hero-right-thumb img.profile {
-            position: relative; z-index: 1;
+            position: relative;
+            z-index: 1;
             transition: transform 0.4s ease;
         }
+
         .th-hero-right-thumb:hover img.profile {
             transform: scale(1.02);
         }
@@ -788,82 +1045,125 @@
         ══════════════════════════════════════ */
         .hero-ai-card-wrap {
             position: absolute;
-            bottom: -24px; left: -20px;
+            bottom: -24px;
+            left: -20px;
             z-index: 5;
         }
+
         .hero-ai-chat-card {
             width: 280px;
-            background: rgba(12,12,12,0.88);
+            background: rgba(12, 12, 12, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            box-shadow: 0 20px 56px rgba(0,0,0,0.6), 0 0 0 1px rgba(222,255,0,0.04);
+            box-shadow: 0 20px 56px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(222, 255, 0, 0.04);
             padding: 16px;
         }
+
         .ai-card-header {
-            display: flex; align-items: center; gap: 7px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
             margin-bottom: 12px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
+
         .ai-card-label {
-            font-size: 12px; font-weight: 600;
+            font-size: 12px;
+            font-weight: 600;
             color: #D1D5DB;
             font-family: "Inter Tight", sans-serif;
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-        .ai-card-messages { display: flex; flex-direction: column; gap: 6px; }
+
+        .ai-card-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
         .ai-msg {
-            font-size: 12px; line-height: 1.5;
-            padding: 8px 10px; border-radius: 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            padding: 8px 10px;
+            border-radius: 10px;
             font-family: "Inter Tight", sans-serif;
             max-width: 90%;
         }
+
         .ai-msg-user {
-            background: rgba(255,255,255,0.07);
+            background: rgba(255, 255, 255, 0.07);
             color: #D1D5DB;
-            margin-left: auto; text-align: right;
+            margin-left: auto;
+            text-align: right;
             border-bottom-right-radius: 3px;
         }
+
         .ai-msg-bot {
-            background: rgba(222,255,0,0.07);
+            background: rgba(222, 255, 0, 0.07);
             color: #E5E7EB;
             margin-right: auto;
             border-bottom-left-radius: 3px;
             min-height: 58px;
-            display: flex; align-items: center;
+            display: flex;
+            align-items: center;
         }
+
         .ai-typing {
-            display: inline-flex; align-items: center; gap: 3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
         }
+
         .ai-typing span {
             display: inline-block;
-            width: 5px; height: 5px;
-            background: #9CA3AF; border-radius: 50%;
+            width: 5px;
+            height: 5px;
+            background: #9CA3AF;
+            border-radius: 50%;
             animation: ai-dot-bounce 0.8s ease-in-out infinite;
         }
-        .ai-typing span:nth-child(2) { animation-delay: 0.15s; }
-        .ai-typing span:nth-child(3) { animation-delay: 0.30s; }
-        @keyframes ai-dot-bounce {
-            0%, 100% { transform: translateY(0); }
-            50%       { transform: translateY(-4px); }
+
+        .ai-typing span:nth-child(2) {
+            animation-delay: 0.15s;
         }
+
+        .ai-typing span:nth-child(3) {
+            animation-delay: 0.30s;
+        }
+
+        @keyframes ai-dot-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
         @media (max-width: 767px) {
             .hero-ai-card-wrap {
                 position: static;
                 margin-top: 16px;
             }
-            .hero-ai-chat-card { width: 100%; }
+
+            .hero-ai-chat-card {
+                width: 100%;
+            }
         }
 
         /* ══════════════════════════════════════
            TECH MARQUEE
         ══════════════════════════════════════ */
         .hero-tech-marquee {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             overflow: hidden;
             padding: 24px 80px;
             position: absolute;
@@ -871,10 +1171,11 @@
             right: 0;
             bottom: 0;
             z-index: 2;
-            background: rgba(5,5,5,0.58);
+            background: rgba(5, 5, 5, 0.58);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
         }
+
         .hero-marquee-track {
             display: flex;
             align-items: center;
@@ -883,28 +1184,42 @@
             width: 100%;
             animation: none;
         }
+
         .hero-tech-marquee:hover .hero-marquee-track {
             animation-play-state: paused;
         }
+
         @keyframes marquee-scroll {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
         }
+
         .marquee-item {
             font-family: "Inter Tight", sans-serif;
-            font-size: 13px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.1em;
-            color: rgba(255,255,255,0.55);
-            padding: 0; white-space: nowrap;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.55);
+            padding: 0;
+            white-space: nowrap;
         }
+
         .marquee-sep {
-            color: #DEFF00; font-size: 11px;
-            flex-shrink: 0; line-height: 1;
+            color: #DEFF00;
+            font-size: 11px;
+            flex-shrink: 0;
+            line-height: 1;
         }
 
         .hero-tech-label,
         .hero-tech-closing {
-            color: rgba(255,255,255,0.58);
+            color: rgba(255, 255, 255, 0.58);
             font-size: 13px;
             font-weight: 500;
             letter-spacing: 0.22em;
@@ -920,7 +1235,10 @@
         /* ══════════════════════════════════════
            BACK-TO-TOP — hidden while hero is visible
         ══════════════════════════════════════ */
-        .progress-wrap { transition: opacity 0.4s ease, visibility 0.4s ease !important; }
+        .progress-wrap {
+            transition: opacity 0.4s ease, visibility 0.4s ease !important;
+        }
+
         body.hero-in-view .progress-wrap {
             opacity: 0 !important;
             visibility: hidden !important;
@@ -934,10 +1252,12 @@
             outline: none !important;
             box-shadow: none !important;
         }
+
         .th-header-btn {
             outline: none !important;
         }
     </style>
+    <link rel="stylesheet" href="assets/css/theme-toggle.css">
 </head>
 
 <body>
@@ -968,14 +1288,16 @@
                 </div>
             </div>
             <div class="th-header-top-btn-flex">
-                <button class="header-theme-toggle" type="button" aria-label="Toggle theme"><i class="fa-regular fa-sun"></i></button>
+                <button class="header-theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false"
+                    title="Switch to light mode"><i class="fa-regular fa-sun" aria-hidden="true"></i></button>
                 <div class="th-header-btn">
                     <a href="contact.html" class="th-primary-btn th-primary-btn-secondary2">
                         <span class="th-text th-upper">Start a Project <i class="fa-regular fa-arrow-right"></i></span>
                     </a>
                 </div>
                 <div class="th-header-action-item">
-                    <a href="#" class="th-menu-btn th-offcanvas-toggle" aria-label="Open navigation menu">MENU <span><img src="assets/img/icon/th-menu.svg" alt=""></span></a>
+                    <a href="#" class="th-menu-btn th-offcanvas-toggle" aria-label="Open navigation menu">MENU
+                        <span><img src="assets/img/icon/th-menu.svg" alt=""></span></a>
                 </div>
             </div>
         </div>
@@ -994,7 +1316,8 @@
                     <a href="index.html"><img src="assets/img/logo/logo-white.png" height="50" alt="Huzaifa Gulzar"></a>
                 </div>
                 <div class="th-offcanvas-close">
-                    <button class="th-offcanvas-close-toggle" aria-label="Close navigation menu"><i class="fa-regular fa-xmark"></i></button>
+                    <button class="th-offcanvas-close-toggle" aria-label="Close navigation menu"><i
+                            class="fa-regular fa-xmark"></i></button>
                 </div>
             </div>
 
@@ -1004,28 +1327,47 @@
 
             <div class="th-offcanvas-content mb-40">
                 <h2 class="th-offcanvas-title">Huzaifa Gulzar</h2>
-                <p class="th-offcanvas-para">Full Stack & AI Developer specializing in SaaS platforms, Laravel, PHP 8+, React, Vue.js, and cutting-edge AI/LLM integrations.</p>
+                <p class="th-offcanvas-para">Full Stack & AI Developer specializing in SaaS platforms, Laravel, PHP 8+,
+                    React, Vue.js, and cutting-edge AI/LLM integrations.</p>
             </div>
 
             <div class="th-offcanvas-gallery mb-40">
-                <a class="popup-image" href="assets/img/designer/laravel-backend.png" data-title="Backend & Laravel Development" data-details="Enterprise-grade REST APIs, robust database architecture, and scalable server management built with Laravel and modern PHP 8+." data-tech="Laravel 10, PHP 8+, MySQL, Redis, REST APIs, Nginx, Linux"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                <a class="popup-image" href="assets/img/designer/laravel-backend.png"
+                    data-title="Backend & Laravel Development"
+                    data-details="Enterprise-grade REST APIs, robust database architecture, and scalable server management built with Laravel and modern PHP 8+."
+                    data-tech="Laravel 10, PHP 8+, MySQL, Redis, REST APIs, Nginx, Linux"><img class="w-100"
+                        style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
                         src="assets/img/designer/laravel-backend.png" alt="Laravel Backend"></a>
 
-                <a class="popup-image" href="assets/img/designer/fullstack-solutions.png" data-title="Full Stack Web Solutions" data-details="End-to-end SaaS platforms with responsive UI/UX, real-time WebSocket data synchronization, and cloud infrastructure." data-tech="Vue.js, React, Node.js, Laravel, WebSockets, Pusher, Cloud"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                <a class="popup-image" href="assets/img/designer/fullstack-solutions.png"
+                    data-title="Full Stack Web Solutions"
+                    data-details="End-to-end SaaS platforms with responsive UI/UX, real-time WebSocket data synchronization, and cloud infrastructure."
+                    data-tech="Vue.js, React, Node.js, Laravel, WebSockets, Pusher, Cloud"><img class="w-100"
+                        style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
                         src="assets/img/designer/fullstack-solutions.png" alt="Full Stack Solutions"></a>
 
-                <a class="popup-image" href="assets/img/designer/ai-llm-dashboard.png" data-title="AI & LLM Integration" data-details="Next-generation intelligent applications featuring RAG chatbots, OpenAI & Claude AI integrations, and automated workflows." data-tech="OpenAI API, Claude AI, RAG, Python, Vector DB, LLM Agents"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                <a class="popup-image" href="assets/img/designer/ai-llm-dashboard.png" data-title="AI & LLM Integration"
+                    data-details="Next-generation intelligent applications featuring RAG chatbots, OpenAI & Claude AI integrations, and automated workflows."
+                    data-tech="OpenAI API, Claude AI, RAG, Python, Vector DB, LLM Agents"><img class="w-100"
+                        style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
                         src="assets/img/designer/ai-llm-dashboard.png" alt="AI LLM Dashboard"></a>
 
-                <a class="popup-image" href="assets/img/designer/th-service-thumb1.1.webp" data-title="Frontend Web Development" data-details="High-performance, dynamic user interfaces built with React, Vue, and Tailwind CSS optimized for Core Web Vitals and SEO." data-tech="React.js, Vue.js, TypeScript, Tailwind CSS, Vite, JavaScript ES6+"><img class="w-100" style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
+                <a class="popup-image" href="assets/img/designer/th-service-thumb1.1.webp"
+                    data-title="Frontend Web Development"
+                    data-details="High-performance, dynamic user interfaces built with React, Vue, and Tailwind CSS optimized for Core Web Vitals and SEO."
+                    data-tech="React.js, Vue.js, TypeScript, Tailwind CSS, Vite, JavaScript ES6+"><img class="w-100"
+                        style="border-radius: 8px; object-fit: cover; aspect-ratio: 1;"
                         src="assets/img/designer/th-service-thumb1.1.webp" alt="Frontend Development"></a>
             </div>
 
             <div class="th-offcanvas-info mb-30">
                 <h3 class="th-offcanvas-title mb-20">Get In Touch</h3>
-                <a href="mailto:huzaifa6715@gmail.com"><i class="fa-regular fa-envelope" style="color: #DEFF00; margin-right: 10px;"></i> huzaifa6715@gmail.com</a>
-                <a href="contact.html"><i class="fa-regular fa-location-dot" style="color: #DEFF00; margin-right: 10px;"></i> Available Worldwide / Remote</a>
-                <a href="portfolio.html"><i class="fa-regular fa-briefcase" style="color: #DEFF00; margin-right: 10px;"></i> View Featured Works</a>
+                <a href="mailto:huzaifa6715@gmail.com"><i class="fa-regular fa-envelope"
+                        style="color: #DEFF00; margin-right: 10px;"></i> huzaifa6715@gmail.com</a>
+                <a href="contact.html"><i class="fa-regular fa-location-dot"
+                        style="color: #DEFF00; margin-right: 10px;"></i> Available Worldwide / Remote</a>
+                <a href="portfolio.html"><i class="fa-regular fa-briefcase"
+                        style="color: #DEFF00; margin-right: 10px;"></i> View Featured Works</a>
             </div>
 
             <div class="th-offcanvas-social mb-30">
@@ -1054,11 +1396,13 @@
                                 <div class="th-banner-content p-relative z-index-1">
 
                                     <!-- Tag -->
-                                    <p class="th-subtitle">Software Engineer &bull; Web &amp; SaaS Products &bull; Lahore, PK</p>
+                                    <p class="th-subtitle">Software Engineer &bull; Web &amp; SaaS Products &bull;
+                                        Lahore, PK</p>
 
                                     <!-- Hero headline -->
                                     <h1 class="hero-title">
-                                        <span class="sr-only">I engineer digital products built for real businesses.</span>
+                                        <span class="sr-only">I engineer digital products built for real
+                                            businesses.</span>
                                         <span aria-hidden="true">
                                             <span class="line">I engineer digital</span>
                                             <span class="line line--flex">
@@ -1069,7 +1413,8 @@
                                     </h1>
 
                                     <!-- Subline -->
-                                    <p class="hero-subline">I design and build SaaS platforms, business dashboards, booking systems and custom web applications from idea to production.</p>
+                                    <p class="hero-subline">I design and build SaaS platforms, business dashboards,
+                                        booking systems and custom web applications from idea to production.</p>
                                     <p class="hero-tech-stack">Laravel &bull; React &bull; Vue &bull; Next.js</p>
 
                                     <!-- CTAs -->
@@ -1078,7 +1423,9 @@
                                             <span class="th-icon"><i class="fa-regular fa-arrow-right"></i></span>
                                             <span class="th-text">View My Work</span>
                                         </a>
-                                        <a href="/assets/cv/Huzaifa_Gulzar.pdf" target="_blank" rel="noopener" class="hero-btn-ghost">Download CV <i class="fa-regular fa-download"></i></a>
+                                        <a href="/assets/cv/Huzaifa_Gulzar.pdf" target="_blank" rel="noopener"
+                                            class="hero-btn-ghost">Download CV <i
+                                                class="fa-regular fa-download"></i></a>
                                     </div>
 
                                     <!-- Stats -->
@@ -1102,26 +1449,30 @@
                             <div class="col-xl-3 col-lg-5 hero-visual-col">
                                 <div class="p-relative z-index-1">
                                     <div class="p-relative">
-                                        <div class="th-hero-right-thumb d-none d-lg-block" style="position: relative; z-index: 1;">
-                                            <img
-                                                class="profile"
-                                                src="assets/img/profile/hero-profile-new.jpg"
-                                                alt="Huzaifa Gulzar, Full Stack Developer"
-                                                width="auto" height="460"
-                                                loading="eager"
-                                                fetchpriority="high"
+                                        <div class="th-hero-right-thumb d-none d-lg-block"
+                                            style="position: relative; z-index: 1;">
+                                            <img class="profile" src="assets/img/profile/hero-profile-new.jpg"
+                                                alt="Huzaifa Gulzar, Full Stack Developer" width="auto" height="460"
+                                                loading="eager" fetchpriority="high"
                                                 style="height: 460px !important; border-radius: 16px; margin-top: 0;">
                                             <div class="th-rotate-text p-relative" aria-hidden="true"></div>
                                         </div>
 
                                         <!-- Badge — centered on photo's top-right corner -->
-                                        <div class="th-circle-txt-wrap d-none d-xl-block" style="position: absolute; top: 0; right: 0; transform: translate(50%, -50%); z-index: 3;">
-                                            <svg class="circle" width="104" height="104" viewBox="0 0 104 104" aria-label="Since 2024 · Full Stack Developer" role="img">
+                                        <div class="th-circle-txt-wrap d-none d-xl-block"
+                                            style="position: absolute; top: 0; right: 0; transform: translate(50%, -50%); z-index: 3;">
+                                            <svg class="circle" width="104" height="104" viewBox="0 0 104 104"
+                                                aria-label="Since 2024 · Full Stack Developer" role="img">
                                                 <defs>
-                                                    <path id="badge-cp" d="M52,52 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0" fill="none"/>
+                                                    <path id="badge-cp"
+                                                        d="M52,52 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"
+                                                        fill="none" />
                                                 </defs>
-                                                <text font-size="8" fill="rgba(255,255,255,0.82)" font-family="Inter Tight,sans-serif" letter-spacing="2.2" font-weight="700">
-                                                    <textPath href="#badge-cp">SINCE 2024 ✦ FULL STACK DEV ✦ &nbsp;</textPath>
+                                                <text font-size="8" fill="rgba(255,255,255,0.82)"
+                                                    font-family="Inter Tight,sans-serif" letter-spacing="2.2"
+                                                    font-weight="700">
+                                                    <textPath href="#badge-cp">SINCE 2024 ✦ FULL STACK DEV ✦ &nbsp;
+                                                    </textPath>
                                                 </text>
                                             </svg>
                                             <div class="th-icontext" aria-hidden="true">
@@ -1137,9 +1488,11 @@
                                                     <span class="ai-card-label">HR ASSISTANT &middot; AI</span>
                                                 </div>
                                                 <div class="ai-card-messages">
-                                                    <div class="ai-msg ai-msg-user">How many leave days do I have left?</div>
+                                                    <div class="ai-msg ai-msg-user">How many leave days do I have left?
+                                                    </div>
                                                     <div class="ai-msg ai-msg-bot" id="aiBotMsg">
-                                                        <span class="ai-typing" id="aiTyping"><span></span><span></span><span></span></span>
+                                                        <span class="ai-typing"
+                                                            id="aiTyping"><span></span><span></span><span></span></span>
                                                         <span class="ai-msg-text" id="aiMsgText"></span>
                                                     </div>
                                                 </div>
@@ -1196,14 +1549,18 @@
                                         Full Stack Developer
                                     </div>
                                     <p class="th-about-bio mb-35">
-                                        I build fast, clean, and scalable web experiences that solve real problems and help businesses grow online. With modern tools and a passion for detail, I turn ideas into powerful digital solutions.
+                                        I build fast, clean, and scalable web experiences that solve real problems and
+                                        help businesses grow online. With modern tools and a passion for detail, I turn
+                                        ideas into powerful digital solutions.
                                     </p>
                                     <div class="th-about-btns d-flex flex-nowrap align-items-center gap-3">
-                                        <a href="contact.html" class="th-btn-neon">Let's Connect <i class="fa-regular fa-arrow-up-right"></i></a>
-                                        <a href="assets/resume.pdf" class="th-btn-ghost" download>Download CV <i class="fa-regular fa-download"></i></a>
+                                        <a href="contact.html" class="th-btn-neon">Let's Connect <i
+                                                class="fa-regular fa-arrow-up-right"></i></a>
+                                        <a href="assets/resume.pdf" class="th-btn-ghost" download>Download CV <i
+                                                class="fa-regular fa-download"></i></a>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -1243,16 +1600,26 @@
                         <div class="th-about-tech-card" data-aos="fade-up" data-aos-delay="100">
                             <h4 class="th-tech-card-title">TECHNOLOGIES I WORK WITH</h4>
                             <div class="th-tech-icons-grid">
-                                <div class="tech-icon-item"><img src="assets/img/icon/Laravel.png" alt="Laravel"><span>Laravel</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/php.svg" alt="PHP"><span>PHP</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/javascript.svg" alt="JavaScript"><span>JavaScript</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/React.png" alt="React"><span>React</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/Vue.svg" alt="Vue"><span>Vue.js</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/nodejs.svg" alt="Node.js"><span>Node.js</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/Mysql.png" alt="MySQL"><span>MySQL</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/redis.svg" alt="Redis"><span>Redis</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/tailwindcss.svg" alt="Tailwind"><span>Tailwind</span></div>
-                                <div class="tech-icon-item"><img src="assets/img/icon/github.svg" alt="Git"><span>Git</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/Laravel.png"
+                                        alt="Laravel"><span>Laravel</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/php.svg"
+                                        alt="PHP"><span>PHP</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/javascript.svg"
+                                        alt="JavaScript"><span>JavaScript</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/React.png"
+                                        alt="React"><span>React</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/Vue.svg"
+                                        alt="Vue"><span>Vue.js</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/nodejs.svg"
+                                        alt="Node.js"><span>Node.js</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/Mysql.png"
+                                        alt="MySQL"><span>MySQL</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/redis.svg"
+                                        alt="Redis"><span>Redis</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/tailwindcss.svg"
+                                        alt="Tailwind"><span>Tailwind</span></div>
+                                <div class="tech-icon-item"><img src="assets/img/icon/github.svg"
+                                        alt="Git"><span>Git</span></div>
                             </div>
                         </div>
                     </div>
@@ -1274,8 +1641,10 @@
                                     <h3 class="role-title mb-1">Full Stack Developer</h3>
                                     <p class="role-sub mb-0">At Bitlogicx</p>
                                 </div>
-                                <a href="https://bitlogicx.com/" target="_blank" rel="noopener noreferrer" title="Visit Bitlogicx" style="display: inline-block;">
-                                    <img src="assets/img/logo/bitlogicx.png" alt="Bitlogicx" class="bitlogicx-logo-badge">
+                                <a href="https://bitlogicx.com/" target="_blank" rel="noopener noreferrer"
+                                    title="Visit Bitlogicx" style="display: inline-block;">
+                                    <img src="assets/img/logo/bitlogicx.png" alt="Bitlogicx"
+                                        class="bitlogicx-logo-badge">
                                 </a>
                             </div>
 
@@ -1283,31 +1652,37 @@
                                 <div class="role-feature-item">
                                     <div class="feature-check"><i class="fa-solid fa-check"></i></div>
                                     <div class="feature-text">
-                                        <strong>SaaS Platforms End-to-End:</strong> Build & maintain SaaS platforms using Laravel, PHP, React, Vue.js, MySQL, Redis.
+                                        <strong>SaaS Platforms End-to-End:</strong> Build & maintain SaaS platforms
+                                        using Laravel, PHP, React, Vue.js, MySQL, Redis.
                                     </div>
                                 </div>
                                 <div class="role-feature-item">
                                     <div class="feature-check"><i class="fa-solid fa-check"></i></div>
                                     <div class="feature-text">
-                                        <strong>REST API Integration:</strong> Design & integrate REST APIs — payments, maps, multi-currency, hotel/booking systems.
+                                        <strong>REST API Integration:</strong> Design & integrate REST APIs — payments,
+                                        maps, multi-currency, hotel/booking systems.
                                     </div>
                                 </div>
                                 <div class="role-feature-item">
                                     <div class="feature-check"><i class="fa-solid fa-check"></i></div>
                                     <div class="feature-text">
-                                        <strong>Real-time & AI Modules:</strong> Implement real-time features (WebSockets/Pusher), AI-powered modules (RAG chatbots, LLM integration), and admin dashboards.
+                                        <strong>Real-time & AI Modules:</strong> Implement real-time features
+                                        (WebSockets/Pusher), AI-powered modules (RAG chatbots, LLM integration), and
+                                        admin dashboards.
                                     </div>
                                 </div>
                                 <div class="role-feature-item">
                                     <div class="feature-check"><i class="fa-solid fa-check"></i></div>
                                     <div class="feature-text">
-                                        <strong>Performance Optimization:</strong> Improve performance, audits, image pipelines, bundle splitting, DB query tuning, Redis caching.
+                                        <strong>Performance Optimization:</strong> Improve performance, audits, image
+                                        pipelines, bundle splitting, DB query tuning, Redis caching.
                                     </div>
                                 </div>
                                 <div class="role-feature-item">
                                     <div class="feature-check"><i class="fa-solid fa-check"></i></div>
                                     <div class="feature-text">
-                                        <strong>DevOps & Server Management:</strong> Handle deployment, server management — Linux/Nginx VPS (aaPanel), SSL, DNS, CI/CD.
+                                        <strong>DevOps & Server Management:</strong> Handle deployment, server
+                                        management — Linux/Nginx VPS (aaPanel), SSL, DNS, CI/CD.
                                     </div>
                                 </div>
                             </div>
@@ -1336,8 +1711,7 @@
         <!-- =========== about area end =========== -->
 
         <!-- =========== service area start =========== -->
-        <section class="th-service-area parallaxie pt-120 pb-90"
-            style="background-image: none; overflow: visible;">
+        <section class="th-service-area parallaxie pt-120 pb-90" style="background-image: none; overflow: visible;">
             <div class="container-fluid" style="margin:0px !important; padding: 0 !important;">
                 <div class="row px-4">
                     <div class="col-xl-8 mx-auto text-center">
@@ -1358,7 +1732,12 @@
                         <div class="col-md-6 p-0 d-flex align-items-center">
                             <div class="th-serviceboxwrap p-relative w-100">
                                 <div class="th-service-thumb image-anime">
-                                    <a class="popup-image" href="assets/img/designer/th-service-thumb1.1.webp" data-title="Frontend Web Development" data-details="High-performance, dynamic user interfaces built with React, Vue, and Tailwind CSS optimized for Core Web Vitals and SEO." data-tech="React.js, Vue.js, TypeScript, Tailwind CSS, Vite, JavaScript ES6+"><img class="w-100" src="assets/img/designer/th-service-thumb1.1.webp" style="object-fit: cover;" alt="Frontend Development"></a>
+                                    <a class="popup-image" href="assets/img/designer/th-service-thumb1.1.webp"
+                                        data-title="Frontend Web Development"
+                                        data-details="High-performance, dynamic user interfaces built with React, Vue, and Tailwind CSS optimized for Core Web Vitals and SEO."
+                                        data-tech="React.js, Vue.js, TypeScript, Tailwind CSS, Vite, JavaScript ES6+"><img
+                                            class="w-100" src="assets/img/designer/th-service-thumb1.1.webp"
+                                            style="object-fit: cover;" alt="Frontend Development"></a>
                                 </div>
                                 <div class="th-numbox">
                                     <span class="th-num">01</span>
@@ -1368,9 +1747,12 @@
                         <!-- Right Column: Text -->
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
-                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg"
+                                        alt=""></span>
                                 <h3 class="th-title pb-12"><a href="service-details.html">Frontend Development</a></h3>
-                                <p class="th-desc">I build modern, responsive, and smooth user interfaces using HTML, CSS, JavaScript, React, Next.js, and Tailwind CSS with a strong focus on clean design and performance.</p>
+                                <p class="th-desc">I build modern, responsive, and smooth user interfaces using HTML,
+                                    CSS, JavaScript, React, Next.js, and Tailwind CSS with a strong focus on clean
+                                    design and performance.</p>
                                 <a href="#" class="th-more-btn mt-40">Explore My Services</a>
                             </div>
                         </div>
@@ -1383,7 +1765,12 @@
                         <div class="col-md-6 p-0 d-flex align-items-center">
                             <div class="th-serviceboxwrap p-relative w-100">
                                 <div class="th-service-thumb image-anime">
-                                    <a class="popup-image" href="assets/img/designer/laravel-backend.png" data-title="Backend & Laravel Development" data-details="Enterprise-grade REST APIs, robust database architecture, and scalable server management built with Laravel and modern PHP 8+." data-tech="Laravel 10, PHP 8+, MySQL, Redis, REST APIs, Nginx, Linux"><img class="w-100" src="assets/img/designer/laravel-backend.png" style="object-fit: cover;" alt="Backend & Laravel Development"></a>
+                                    <a class="popup-image" href="assets/img/designer/laravel-backend.png"
+                                        data-title="Backend & Laravel Development"
+                                        data-details="Enterprise-grade REST APIs, robust database architecture, and scalable server management built with Laravel and modern PHP 8+."
+                                        data-tech="Laravel 10, PHP 8+, MySQL, Redis, REST APIs, Nginx, Linux"><img
+                                            class="w-100" src="assets/img/designer/laravel-backend.png"
+                                            style="object-fit: cover;" alt="Backend & Laravel Development"></a>
                                 </div>
                                 <div class="th-numbox">
                                     <span class="th-num th-num-2">02</span>
@@ -1392,9 +1779,13 @@
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
-                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
-                                <h3 class="th-title pb-12"><a href="service-details.html">Backend & Laravel Development</a></h3>
-                                <p class="th-desc">I develop secure, scalable, and well-structured backend systems using PHP, Laravel, MySQL, APIs, authentication, dashboards, and business logic for real-world applications.</p>
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg"
+                                        alt=""></span>
+                                <h3 class="th-title pb-12"><a href="service-details.html">Backend & Laravel
+                                        Development</a></h3>
+                                <p class="th-desc">I develop secure, scalable, and well-structured backend systems using
+                                    PHP, Laravel, MySQL, APIs, authentication, dashboards, and business logic for
+                                    real-world applications.</p>
                                 <a href="#" class="th-more-btn mt-40">Explore My Services</a>
                             </div>
                         </div>
@@ -1407,7 +1798,12 @@
                         <div class="col-md-6 p-0 d-flex align-items-center">
                             <div class="th-serviceboxwrap p-relative w-100">
                                 <div class="th-service-thumb image-anime">
-                                    <a class="popup-image" href="assets/img/designer/fullstack-solutions.png" data-title="Full Stack Web Solutions" data-details="End-to-end SaaS platforms with responsive UI/UX, real-time WebSocket data synchronization, and cloud infrastructure." data-tech="Vue.js, React, Node.js, Laravel, WebSockets, Pusher, Cloud"><img class="w-100" src="assets/img/designer/fullstack-solutions.png" style="object-fit: cover;" alt="Full Stack Web Solutions"></a>
+                                    <a class="popup-image" href="assets/img/designer/fullstack-solutions.png"
+                                        data-title="Full Stack Web Solutions"
+                                        data-details="End-to-end SaaS platforms with responsive UI/UX, real-time WebSocket data synchronization, and cloud infrastructure."
+                                        data-tech="Vue.js, React, Node.js, Laravel, WebSockets, Pusher, Cloud"><img
+                                            class="w-100" src="assets/img/designer/fullstack-solutions.png"
+                                            style="object-fit: cover;" alt="Full Stack Web Solutions"></a>
                                 </div>
                                 <div class="th-numbox">
                                     <span class="th-num">03</span>
@@ -1416,9 +1812,13 @@
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
-                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
-                                <h3 class="th-title pb-12"><a href="service-details.html">Full Stack Web Solutions</a></h3>
-                                <p class="th-desc">I create complete web solutions from frontend design to backend development, including admin panels, AI-powered modules, dynamic websites, API integrations, booking systems, and custom business tools.</p>
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg"
+                                        alt=""></span>
+                                <h3 class="th-title pb-12"><a href="service-details.html">Full Stack Web Solutions</a>
+                                </h3>
+                                <p class="th-desc">I create complete web solutions from frontend design to backend
+                                    development, including admin panels, AI-powered modules, dynamic websites, API
+                                    integrations, booking systems, and custom business tools.</p>
                                 <a href="#" class="th-more-btn mt-40">Explore My Services</a>
                             </div>
                         </div>
@@ -1431,7 +1831,12 @@
                         <div class="col-md-6 p-0 d-flex align-items-center">
                             <div class="th-serviceboxwrap p-relative w-100">
                                 <div class="th-service-thumb image-anime">
-                                    <a class="popup-image" href="assets/img/designer/ai-llm-dashboard.png" data-title="AI & LLM Integration" data-details="Next-generation intelligent applications featuring RAG chatbots, OpenAI & Claude AI integrations, and automated workflows." data-tech="OpenAI API, Claude AI, RAG, Python, Vector DB, LLM Agents"><img class="w-100" src="assets/img/designer/ai-llm-dashboard.png" style="object-fit: cover;" alt="AI & LLM Integration Dashboard"></a>
+                                    <a class="popup-image" href="assets/img/designer/ai-llm-dashboard.png"
+                                        data-title="AI & LLM Integration"
+                                        data-details="Next-generation intelligent applications featuring RAG chatbots, OpenAI & Claude AI integrations, and automated workflows."
+                                        data-tech="OpenAI API, Claude AI, RAG, Python, Vector DB, LLM Agents"><img
+                                            class="w-100" src="assets/img/designer/ai-llm-dashboard.png"
+                                            style="object-fit: cover;" alt="AI & LLM Integration Dashboard"></a>
                                 </div>
                                 <div class="th-numbox">
                                     <span class="th-num">04</span>
@@ -1440,9 +1845,13 @@
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="th-service-iconbox w-100" style="padding-left: 30px;" data-aos="fade-left">
-                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg" alt=""></span>
+                                <span class="th-icon mb-24"><img src="assets/img/icon/th-service-icon1.1.svg"
+                                        alt=""></span>
                                 <h3 class="th-title pb-12"><a href="service-details.html">AI & LLM Integration</a></h3>
-                                <p class="th-desc">I design and integrate cutting-edge AI features into web applications—including RAG (Retrieval-Augmented Generation) chatbots, custom LLM pipelines, real-time neural search, and automated AI workflows for intelligent digital experiences.</p>
+                                <p class="th-desc">I design and integrate cutting-edge AI features into web
+                                    applications—including RAG (Retrieval-Augmented Generation) chatbots, custom LLM
+                                    pipelines, real-time neural search, and automated AI workflows for intelligent
+                                    digital experiences.</p>
                                 <a href="#" class="th-more-btn mt-40">Explore My Services</a>
                             </div>
                         </div>
@@ -1503,7 +1912,8 @@
                             <p>MYSQL & REDIS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/api-websockets.svg" alt="REST & Third-Party APIs"></div>
+                            <div class="th-icon"><img src="assets/img/icon/api-websockets.svg"
+                                    alt="REST & Third-Party APIs"></div>
                             <p>REST & 3RD-PARTY APIS</p>
                         </div>
                         <div class="skill-card">
@@ -1511,11 +1921,13 @@
                             <p>AI / LLM INTEGRATION</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/linux-devops.svg" alt="Nginx & aaPanel"></div>
+                            <div class="th-icon"><img src="assets/img/icon/linux-devops.svg" alt="Nginx & aaPanel">
+                            </div>
                             <p>NGINX & AAPANEL</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/websockets.svg" alt="WebSockets & Pusher"></div>
+                            <div class="th-icon"><img src="assets/img/icon/websockets.svg" alt="WebSockets & Pusher">
+                            </div>
                             <p>WEBSOCKETS & PUSHER</p>
                         </div>
                         <div class="skill-card">
@@ -1523,11 +1935,13 @@
                             <p>NODE.JS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/javascript.svg" alt="JavaScript & TypeScript"></div>
+                            <div class="th-icon"><img src="assets/img/icon/javascript.svg"
+                                    alt="JavaScript & TypeScript"></div>
                             <p>JS (ES6+) & TS</p>
                         </div>
                         <div class="skill-card">
-                            <div class="th-icon"><img src="assets/img/icon/github.svg" class="filter-white" alt="Git & CI/CD"></div>
+                            <div class="th-icon"><img src="assets/img/icon/github.svg" class="filter-white"
+                                    alt="Git & CI/CD"></div>
                             <p>GIT & CI/CD</p>
                         </div>
                     </div>
@@ -1701,11 +2115,13 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <img src="assets/img/projects/lens.png" alt="Lens Platform" style="width: 100%; height: 100%; object-fit: cover; border: none;">
+                                                    <img src="assets/img/projects/lens.png" alt="Lens Platform"
+                                                        style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <div class="th-skill-btn" style="z-index: 15;">
                                                     <a href="#" class="th-primary-btn th-primary-btn-secondary3">
-                                                        <span class="th-icon"><img src="assets/img/icon/th-footer-btn-icon.png"
+                                                        <span class="th-icon"><img
+                                                                src="assets/img/icon/th-footer-btn-icon.png"
                                                                 alt=""></span>
                                                         <span class="th-text">VIEW PROJECT</span>
                                                     </a>
@@ -1725,11 +2141,13 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <img src="assets/img/projects/3guy.png" alt="3 Guys Burgers & Gyros" style="width: 100%; height: 100%; object-fit: cover; border: none;">
+                                                    <img src="assets/img/projects/3guy.png" alt="3 Guys Burgers & Gyros"
+                                                        style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <div class="th-skill-btn" style="z-index: 15;">
                                                     <a href="#" class="th-primary-btn th-primary-btn-secondary3">
-                                                        <span class="th-icon"><img src="assets/img/icon/th-footer-btn-icon.png"
+                                                        <span class="th-icon"><img
+                                                                src="assets/img/icon/th-footer-btn-icon.png"
                                                                 alt=""></span>
                                                         <span class="th-text">VIEW PROJECT</span>
                                                     </a>
@@ -1749,11 +2167,14 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <img src="assets/img/projects/discovery.png" alt="Discovery Holidays Travel" style="width: 100%; height: 100%; object-fit: cover; border: none;">
+                                                    <img src="assets/img/projects/discovery.png"
+                                                        alt="Discovery Holidays Travel"
+                                                        style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <div class="th-skill-btn" style="z-index: 15;">
                                                     <a href="#" class="th-primary-btn th-primary-btn-secondary3">
-                                                        <span class="th-icon"><img src="assets/img/icon/th-footer-btn-icon.png"
+                                                        <span class="th-icon"><img
+                                                                src="assets/img/icon/th-footer-btn-icon.png"
                                                                 alt=""></span>
                                                         <span class="th-text">VIEW PROJECT</span>
                                                     </a>
@@ -1773,11 +2194,13 @@
                                             <div class="th-slide-image p-relative">
                                                 <div class="iframe-container"
                                                     style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; z-index: 10;">
-                                                    <img src="assets/img/projects/biz.png" alt="Resume Amplifiers" style="width: 100%; height: 100%; object-fit: cover; border: none;">
+                                                    <img src="assets/img/projects/biz.png" alt="Resume Amplifiers"
+                                                        style="width: 100%; height: 100%; object-fit: cover; border: none;">
                                                 </div>
                                                 <div class="th-skill-btn" style="z-index: 15;">
                                                     <a href="#" class="th-primary-btn th-primary-btn-secondary3">
-                                                        <span class="th-icon"><img src="assets/img/icon/th-footer-btn-icon.png"
+                                                        <span class="th-icon"><img
+                                                                src="assets/img/icon/th-footer-btn-icon.png"
                                                                 alt=""></span>
                                                         <span class="th-text">VIEW PROJECT</span>
                                                     </a>
@@ -1924,7 +2347,8 @@
                                 <img class="w-100" src="assets/img/designer/th-portfolio-2.4.png" alt="">
                             </div>
                             <div class="th-portfolio-wrap-content">
-                                <h3 class="th-title"><a href="http://apothecary.site.je/" target="_blank" rel="noopener noreferrer">Apothecary</a></h3>
+                                <h3 class="th-title"><a href="http://apothecary.site.je/" target="_blank"
+                                        rel="noopener noreferrer">Apothecary</a></h3>
                                 <p class="th-para">2026 // Apothecary</p>
                             </div>
                         </div>
@@ -2128,7 +2552,8 @@
                                 <div class="col-xl-6 col-md-6 mb-30">
                                     <div class="th-contact-sm-widget-1">
                                         <h3 class="title pb-16">Lahore:</h3>
-                                        <a href="#" class="th-parea">The Residence Boys Hostel LDA Avenue, Shershah Colony Raiwind Road, Lahore, Pakistan</a>
+                                        <a href="#" class="th-parea">The Residence Boys Hostel LDA Avenue, Shershah
+                                            Colony Raiwind Road, Lahore, Pakistan</a>
                                     </div>
                                 </div>
 
@@ -2143,17 +2568,22 @@
                                 <div class="col-xl-6 col-md-6 mb-30">
                                     <div class="th-contact-sm-widget-1">
                                         <h3 class="title pb-16">Email:</h3>
-                                        <a href="mailto:huzaifa6715@gmail.com" class="th-parea">huzaifa6715@gmail.com</a>
+                                        <a href="mailto:huzaifa6715@gmail.com"
+                                            class="th-parea">huzaifa6715@gmail.com</a>
                                     </div>
                                 </div>
 
                                 <div class="col-xl-6 col-md-6 mb-30">
                                     <div class="th-contact-sm-widget-1">
                                         <h3 class="title pb-16">Social Icon:</h3>
-                                        <a href="https://www.facebook.com/profile.php?id=61550130473251" class="contact-social"><i class="fa-brands fa-facebook-f"></i></a>
-                                        <a href="https://www.instagram.com/ihuzaifa.waseer/" class="contact-social"><i class="fa-brands fa-instagram"></i></a>
-                                        <a href="https://www.linkedin.com/in/huzaifa-gulzar-6715l/" class="contact-social"><i class="fa-brands fa-linkedin-in"></i></a>
-                                        <a href="https://github.com/Huzaifag" class="contact-social"><i class="fa-brands fa-github"></i></a>
+                                        <a href="https://www.facebook.com/profile.php?id=61550130473251"
+                                            class="contact-social"><i class="fa-brands fa-facebook-f"></i></a>
+                                        <a href="https://www.instagram.com/ihuzaifa.waseer/" class="contact-social"><i
+                                                class="fa-brands fa-instagram"></i></a>
+                                        <a href="https://www.linkedin.com/in/huzaifa-gulzar-6715l/"
+                                            class="contact-social"><i class="fa-brands fa-linkedin-in"></i></a>
+                                        <a href="https://github.com/Huzaifag" class="contact-social"><i
+                                                class="fa-brands fa-github"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -2426,118 +2856,119 @@
     <script src="assets/js/parallaxie.js"></script>
     <!-- main js -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/theme-toggle.js"></script>
 
     <!-- Rotating headline -->
     <script>
-    (function () {
-        var items = document.querySelectorAll('.rotator-item');
-        if (!items.length) return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        (function () {
+            var items = document.querySelectorAll('.rotator-item');
+            if (!items.length) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        var current = 0;
-        var timer = null;
+            var current = 0;
+            var timer = null;
 
-        function advance() {
-            var prev = current;
-            current = (current + 1) % items.length;
-            items[prev].classList.remove('is-active');
-            items[prev].classList.add('is-leaving');
-            items[current].classList.add('is-active');
-            var leaving = items[prev];
-            setTimeout(function () { leaving.classList.remove('is-leaving'); }, 460);
-        }
+            function advance() {
+                var prev = current;
+                current = (current + 1) % items.length;
+                items[prev].classList.remove('is-active');
+                items[prev].classList.add('is-leaving');
+                items[current].classList.add('is-active');
+                var leaving = items[prev];
+                setTimeout(function () { leaving.classList.remove('is-leaving'); }, 460);
+            }
 
-        function start() { if (!timer) timer = setInterval(advance, 2600); }
-        function stop()  { clearInterval(timer); timer = null; }
+            function start() { if (!timer) timer = setInterval(advance, 2600); }
+            function stop() { clearInterval(timer); timer = null; }
 
-        document.addEventListener('visibilitychange', function () {
-            document.hidden ? stop() : start();
-        });
+            document.addEventListener('visibilitychange', function () {
+                document.hidden ? stop() : start();
+            });
 
-        var hero = document.querySelector('.th-banner-area-1');
-        if (hero && 'IntersectionObserver' in window) {
-            new IntersectionObserver(function (entries) {
-                entries[0].isIntersecting ? start() : stop();
-            }, { threshold: 0.1 }).observe(hero);
-        } else {
-            start();
-        }
-    })();
+            var hero = document.querySelector('.th-banner-area-1');
+            if (hero && 'IntersectionObserver' in window) {
+                new IntersectionObserver(function (entries) {
+                    entries[0].isIntersecting ? start() : stop();
+                }, { threshold: 0.1 }).observe(hero);
+            } else {
+                start();
+            }
+        })();
     </script>
 
     <!-- Back-to-top: hidden while hero is in view -->
     <script>
-    (function () {
-        var hero = document.querySelector('.th-banner-area-1');
-        if (!hero) return;
-        // Add class immediately so button starts hidden
-        document.body.classList.add('hero-in-view');
-        new IntersectionObserver(function (entries) {
-            document.body.classList.toggle('hero-in-view', entries[0].isIntersecting);
-        }, { threshold: 0 }).observe(hero);
-    })();
+        (function () {
+            var hero = document.querySelector('.th-banner-area-1');
+            if (!hero) return;
+            // Add class immediately so button starts hidden
+            document.body.classList.add('hero-in-view');
+            new IntersectionObserver(function (entries) {
+                document.body.classList.toggle('hero-in-view', entries[0].isIntersecting);
+            }, { threshold: 0 }).observe(hero);
+        })();
     </script>
 
     <!-- AI chat card animation -->
     <script>
-    (function () {
-        var card = document.getElementById('heroAiCard');
-        var typingEl = document.getElementById('aiTyping');
-        var msgTextEl = document.getElementById('aiMsgText');
-        if (!card || !typingEl || !msgTextEl) return;
+        (function () {
+            var card = document.getElementById('heroAiCard');
+            var typingEl = document.getElementById('aiTyping');
+            var msgTextEl = document.getElementById('aiMsgText');
+            if (!card || !typingEl || !msgTextEl) return;
 
-        var TEXT = 'You have 12 annual leave days left. Want me to request Friday off?';
-        var loopTimer = null;
-        var isVisible = false;
-        var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var TEXT = 'You have 12 annual leave days left. Want me to request Friday off?';
+            var loopTimer = null;
+            var isVisible = false;
+            var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (reducedMotion) {
-            typingEl.style.display = 'none';
-            msgTextEl.textContent = TEXT;
-            return;
-        }
-
-        function typeText(el, text, cb) {
-            el.style.display = 'inline';
-            el.textContent = '';
-            var i = 0;
-            (function tick() {
-                if (!isVisible) return;
-                if (i < text.length) {
-                    el.textContent += text[i++];
-                    setTimeout(tick, 32);
-                } else if (cb) cb();
-            })();
-        }
-
-        function runCycle() {
-            typingEl.style.display = 'inline-flex';
-            msgTextEl.style.display = 'none';
-            msgTextEl.textContent = '';
-            loopTimer = setTimeout(function () {
-                if (!isVisible) return;
+            if (reducedMotion) {
                 typingEl.style.display = 'none';
-                typeText(msgTextEl, TEXT, function () {
-                    loopTimer = setTimeout(function () {
-                        if (isVisible) runCycle();
-                    }, 8000);
-                });
-            }, 1200);
-        }
+                msgTextEl.textContent = TEXT;
+                return;
+            }
 
-        function startLoop() { clearTimeout(loopTimer); runCycle(); }
-        function stopLoop()  { clearTimeout(loopTimer); loopTimer = null; }
+            function typeText(el, text, cb) {
+                el.style.display = 'inline';
+                el.textContent = '';
+                var i = 0;
+                (function tick() {
+                    if (!isVisible) return;
+                    if (i < text.length) {
+                        el.textContent += text[i++];
+                        setTimeout(tick, 32);
+                    } else if (cb) cb();
+                })();
+            }
 
-        if ('IntersectionObserver' in window) {
-            new IntersectionObserver(function (entries) {
-                isVisible = entries[0].isIntersecting;
-                if (isVisible) startLoop(); else stopLoop();
-            }, { threshold: 0.1 }).observe(card);
-        } else {
-            isVisible = true;
-            startLoop();
-        }
-    })();
+            function runCycle() {
+                typingEl.style.display = 'inline-flex';
+                msgTextEl.style.display = 'none';
+                msgTextEl.textContent = '';
+                loopTimer = setTimeout(function () {
+                    if (!isVisible) return;
+                    typingEl.style.display = 'none';
+                    typeText(msgTextEl, TEXT, function () {
+                        loopTimer = setTimeout(function () {
+                            if (isVisible) runCycle();
+                        }, 8000);
+                    });
+                }, 1200);
+            }
+
+            function startLoop() { clearTimeout(loopTimer); runCycle(); }
+            function stopLoop() { clearTimeout(loopTimer); loopTimer = null; }
+
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(function (entries) {
+                    isVisible = entries[0].isIntersecting;
+                    if (isVisible) startLoop(); else stopLoop();
+                }, { threshold: 0.1 }).observe(card);
+            } else {
+                isVisible = true;
+                startLoop();
+            }
+        })();
     </script>
 </body>
 
